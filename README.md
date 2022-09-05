@@ -4,7 +4,7 @@ Employee management &amp; Payroll System as a software platform for companies fo
 
 ## Modules of Focus
 Main Functionalities
----
+
 1. Company & User Management and user access control 
 2. Employee information Manager
 3. Attendance Manager
