@@ -2,7 +2,7 @@
 *Version 1.0.0*
 Employee management &amp; Payroll System as a software platform for companies for handling and managing emplyee information.
 
-## Modules of Focus 
+## Modules of Focus
 Main Functionalities
 ---
 1. Company & User Management and user access control 
