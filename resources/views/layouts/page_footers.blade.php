@@ -12,6 +12,9 @@
 <!--end::Page Vendors-->
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
+<script src="{{ asset('custom_scripts/js/notiflix-aio-3.2.5.min.js') }}"></script>
+<script src="{{ asset('custom_scripts/js/notify_settings.js') }}"></script>
+<script src="{{ asset('custom_scripts/js/custom.js') }}"></script>
 <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

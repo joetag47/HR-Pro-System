@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Company\DepartmentController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::prefix('company/profile')->group(function () {
+
+    #=================================== DEPARTMENT ROUTES =============================================#
+    Route::prefix('departments')->group(function () {
+        Route::get('/', [DepartmentController::class, 'index'])->name('company.department.index');
+        Route::get('store', [DepartmentController::class, 'index'])->name('company.department.store');
+        Route::post('{department}/update', [DepartmentController::class, 'index'])->name('company.department.update');
+        Route::post('{department}/delete', [DepartmentController::class, 'index'])->name('company.department.delete');
+    });
+});

@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::query()->truncate();
         User::query()->create([
             'name' => 'John Doe',
             'email' => 'user@example.com',
