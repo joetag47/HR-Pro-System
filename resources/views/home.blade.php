@@ -6,7 +6,6 @@
 <!--end::Head-->
 <!--begin::Body-->
 
-        <!--end::Aside-->
         <!--begin::Wrapper-->
         <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
             <!--begin::Content-->

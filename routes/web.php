@@ -29,8 +29,9 @@ Route::prefix('company/profile')->group(function () {
     #=================================== DEPARTMENT ROUTES =============================================#
     Route::prefix('departments')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('company.department.index');
-        Route::get('store', [DepartmentController::class, 'index'])->name('company.department.store');
-        Route::post('{department}/update', [DepartmentController::class, 'index'])->name('company.department.update');
-        Route::post('{department}/delete', [DepartmentController::class, 'index'])->name('company.department.delete');
+        Route::post('store', [DepartmentController::class, 'store'])->name('company.department.store');
+        Route::post('{department}/update', [DepartmentController::class, 'update'])->name('company.department.update');
+        Route::post('{department}/delete', [DepartmentController::class, 'delete'])->name('company.department.delete');
+        Route::post('{department}/fetch', [DepartmentController::class, 'fetch'])->name('company.department.fetch');
     });
 });

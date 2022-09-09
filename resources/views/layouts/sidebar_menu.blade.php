@@ -691,3 +691,4 @@
 <!--end::Scrolltop-->
 <!--end::Demo Panel-->
 @include('layouts.page_footers')
+
