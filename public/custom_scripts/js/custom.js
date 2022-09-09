@@ -97,7 +97,6 @@ $(document).ready(function () {
         promptDialog($(this).attr('href'));
     });
 
-
     function promptDialog(url, type = null){
         Notiflix.Block.pulse('#dataTable');
 
@@ -129,9 +128,6 @@ $(document).ready(function () {
                     }
                 });
 
-
-                Notiflix.Block.remove('.addItem');
-
             },
             {
                 width: '320px',
@@ -141,7 +137,6 @@ $(document).ready(function () {
         Notiflix.Block.remove('#dataTable');
 
     }
-
 
 
     // ================================= DEPARTMENTS JS FLOW =======================================
