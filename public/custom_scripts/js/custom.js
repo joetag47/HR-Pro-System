@@ -45,17 +45,17 @@ $(document).ready(function () {
 
                 pushToastMessage(response.msg, response.code);
 
-                // if(withDatatable === true){
-                //
-                //     $('#dataTable').DataTable().ajax.reload();
-                //
-                // }
+                if(withDatatable === true){
+
+                    $('#dataTable').DataTable().ajax.reload();
+
+                }
 
                 Notiflix.Block.remove(triggerClass);
 
                 setTimeout(function () {
 
-                    $(triggerClass).closest('.modal').modal('toggle');
+                    $(triggerClass).closest('.modal').modal('hide');
 
                 }, 1000)
 
@@ -70,7 +70,6 @@ $(document).ready(function () {
                 Notiflix.Block.remove(triggerClass);
             }
         })
-        // Notiflix.Block.remove('.addItem');
     }
 
 
@@ -85,5 +84,82 @@ $(document).ready(function () {
         submitFormData(url, formData, true, '.addItem');
     });
 
+    function toggleEditModal(editModalElement, editModalForm, editUrl){
 
+        $(editModalForm).attr('action', editUrl)
+
+        $(editModalElement).modal('show');
+
+    }
+
+    dataTable.on('click', '#deleteBtn', function (e){
+        e.preventDefault();
+        promptDialog($(this).attr('href'));
+    });
+
+
+    function promptDialog(url, type = null){
+        Notiflix.Block.pulse('#dataTable');
+
+        let msg = 'You won\'t be able to revert this!';
+
+        if (type === 'department'){
+
+            msg = "Deleting a department will affect employees who belong to the department"
+        }
+
+        Notiflix.Confirm.show(
+            'Are You Sure?',
+            msg,
+            'Yes, Delete',
+            'No',
+            function okCb() {
+                $.post(url, function (response){
+                    console.log(response)
+                    if(response.code === 200){
+                        Notiflix.Report.success(
+                            'Success',
+                            response.msg,
+                            'Okay',
+                        );
+                        dataTable.DataTable().ajax.reload();
+
+                    }else{
+                        pushToastMessage(response.msg, response.code)
+                    }
+                });
+
+
+                Notiflix.Block.remove('.addItem');
+
+            },
+            {
+                width: '320px',
+                borderRadius: '8px',
+            },
+        );
+        Notiflix.Block.remove('#dataTable');
+
+    }
+
+
+
+    // ================================= DEPARTMENTS JS FLOW =======================================
+
+    dataTable.on('click', '.updateDepartment', function (event) {
+        event.preventDefault();
+
+        $.post($(this).attr('href'), function (response) {
+            $('#editName').val(response.data.name);
+            $('#editDescription').val(response.data.description)
+            toggleEditModal('#departmentEditModal', '#editDepartmentForm', response.url)
+        })
+
+
+    })
+
+    dataTable.on('click', '.deleteDepartment', function (e){
+        e.preventDefault();
+        promptDialog($(this).attr('href'), 'department');
+    });
 })

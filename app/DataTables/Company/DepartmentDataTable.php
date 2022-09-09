@@ -27,8 +27,8 @@ class DepartmentDataTable extends DataTable
             })
             ->addColumn('action', function ($query){
                 return '<div style="display:inline-flex;">
-                        <a class="btn btn-sm btn-icon mr-2 btn-circle btn-warning btn-shadow" href="'.route('company.department.fetch', $query->id).'"><i class="fa fa-edit fa-sm"></i></a>
-                        <a class="btn btn-sm btn-icon btn-circle btn-danger btn-shadow" href="'.route('company.department.delete', $query->id).'"><i class="fa fa-trash fa-sm"></i></a>
+                        <a class="btn btn-sm btn-icon mr-2 btn-circle btn-warning btn-shadow updateDepartment" href="'.route('company.department.fetch', $query->id).'"><i class="fa fa-edit fa-sm"></i></a>
+                        <a class="btn btn-sm btn-icon btn-circle btn-danger btn-shadow deleteDepartment" href="'.route('company.department.delete', $query->id).'"><i class="fa fa-trash fa-sm"></i></a>
                     </div>';
             });
     }

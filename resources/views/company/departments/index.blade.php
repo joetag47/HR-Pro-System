@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            {!! $dataTable->table(['class' => 'table table-responsive']) !!}
+                            {!! $dataTable->table(['class' => 'table table-hover table-striped table-bordered']) !!}
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,38 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary font-weight-bold">Save changes</button>
+                            <button type="submit" class="btn btn-primary font-weight-bold">Save Department</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="departmentEditModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i aria-hidden="true" class="ki ki-close"></i>
+                        </button>
+                    </div>
+                    <form class="addItem" id="editDepartmentForm" action="" method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="name" id="editName">
+                            </div>
+                            <div class="form-group">
+                                <label>Description </label>
+                                <textarea class="form-control" name="description" id="editDescription"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary font-weight-bold">Update Department</button>
                         </div>
                     </form>
                 </div>

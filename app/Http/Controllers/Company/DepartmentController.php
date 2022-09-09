@@ -63,12 +63,57 @@ class DepartmentController extends Controller
 
     public function update(Request $request, Department $department)
     {
-        return [$request->all(), $department];
+        $data = $request->all();
+
+        $validate = Validator::make($data, $this->validateFields($department->id));
+
+        if ($validate->fails())
+            return $this->failureResponse($validate->errors()->first());
+
+        DB::beginTransaction();
+
+        try {
+
+            $department->update($this->dumpDepartment($data));
+
+            DB::commit();
+
+            return $this->successResponse("Department: {$department->name} successfully updated");
+
+        } catch (\Exception $e){
+
+            DB::rollBack();
+
+            $this->logCompanyServiceInfo(':: DEPARTMENT UPDATE ERROR ::', "{$e->getMessage()} :: {$e->getCode()}");
+
+            return $this->failureResponse('Department could not be updated. Kindly try again');
+        }
+
+
     }
 
     public function delete(Department $department)
     {
-        return $department;
+        DB::beginTransaction();
+        try {
+
+            DB::table('users')->where('department_id', $department->id)
+                ->update(['department_id' => null]);
+
+            $department->delete();
+
+            DB::commit();
+
+            return $this->successResponse("Department: {$department->name} successfully deleted");
+
+        } catch (\Exception $e){
+            DB::rollBack();
+
+            $this->logCompanyServiceInfo(':: DEPARTMENT DELETE ERROR ::', "{$e->getMessage()} :: {$e->getCode()}");
+
+            return $this->failureResponse('Department could not be deleted. Kindly try again');
+        }
+
     }
 
     public function fetch(Department $department)
@@ -79,10 +124,10 @@ class DepartmentController extends Controller
         ]);
     }
 
-    public function validateFields()
+    public function validateFields($department = null)
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:departments,name,'.$department,
             'description' => 'nullable'
         ];
     }
