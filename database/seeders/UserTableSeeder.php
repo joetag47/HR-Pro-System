@@ -18,7 +18,7 @@ class UserTableSeeder extends Seeder
     {
         for ($i = 1; $i <50; $i++){
             $user = User::create([
-               'name' => 'Bkantwi', $i,
+               'name' => 'Bkantwi'.$i,
                 'email' => 'bkantwi'.$i.'@test.com',
                 'is_admin' => 0,
                 'email_verified_at' => now(),
