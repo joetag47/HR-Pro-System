@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Company\DepartmentController;
+use App\Http\Controllers\Company\EmployeeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,12 @@ Route::prefix('company/profile')->group(function () {
         Route::post('{department}/update', [DepartmentController::class, 'update'])->name('company.department.update');
         Route::post('{department}/delete', [DepartmentController::class, 'delete'])->name('company.department.delete');
         Route::post('{department}/fetch', [DepartmentController::class, 'fetch'])->name('company.department.fetch');
+    });
+
+    #=================================== EMPLOYEE ROUTES ===============================================#
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index'])->name('company.employee.index');
+        Route::get('create', [EmployeeController::class, 'create'])->name('company.employee.create');
+        Route::post('store', [EmployeeController::class, 'store'])->name('company.employee.store');
     });
 });
