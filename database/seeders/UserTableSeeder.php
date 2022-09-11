@@ -25,8 +25,11 @@ class UserTableSeeder extends Seeder
                 'password' => bcrypt('password'), // password
                 'remember_token' => Str::random(10),
             ]);
+
 //            5 because the user role id I created is 5
+
             $role = Role::where('id', 5)->first();
+
             $user->syncRoles($role);
         }
     }
