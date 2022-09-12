@@ -33,7 +33,7 @@ var KTWizard2 = function () {
                         KTUtil.scrollTop();
                     } else {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Kindly fill all required form fields before submitting.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -93,35 +93,42 @@ var KTWizard2 = function () {
             _formEl,
             {
                 fields: {
-                    fname: {
+                    full_name: {
                         validators: {
                             notEmpty: {
-                                message: 'First name is required'
-                            }
-                        }
-                    },
-                    lname: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Last Name is required'
-                            }
-                        }
-                    },
-                    phone: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Phone is required'
+                                message: 'Full Name field is required'
                             }
                         }
                     },
                     email: {
                         validators: {
                             notEmpty: {
-                                message: 'Email is required'
+                                message: 'Email field is required'
                             },
                             emailAddress: {
-                                message: 'The value is not a valid email address'
+                                message: 'Kindly provide a valid email address'
                             }
+                        }
+                    },
+                    date_of_birth: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Date of Birth is required'
+                            }
+                        }
+                    },
+                    place_of_birth: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Place of Birth is required'
+                            }
+                        }
+                    },
+                    gender: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Gender field is required'
+                            },
                         }
                     }
                 },
@@ -141,38 +148,31 @@ var KTWizard2 = function () {
             _formEl,
             {
                 fields: {
-                    address1: {
+                    residential_address: {
                         validators: {
                             notEmpty: {
-                                message: 'Address is required'
+                                message: 'Residential Address is required'
                             }
                         }
                     },
-                    postcode: {
+                    phone_number: {
                         validators: {
                             notEmpty: {
-                                message: 'Postcode is required'
+                                message: 'Phone Number is required'
                             }
                         }
                     },
-                    city: {
+                    identity_type: {
                         validators: {
                             notEmpty: {
-                                message: 'City is required'
+                                message: 'Identity Type is required'
                             }
                         }
                     },
-                    state: {
+                    id_file: {
                         validators: {
                             notEmpty: {
-                                message: 'State is required'
-                            }
-                        }
-                    },
-                    country: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Country is required'
+                                message: 'ID File field is required'
                             }
                         }
                     }
