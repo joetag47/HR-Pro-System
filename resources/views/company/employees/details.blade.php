@@ -36,24 +36,17 @@
             <div class="container">
                 <div class="card card-custom gutter-b example example-compact shadow-lg">
                     <div class="card-header">
-                        <h3 class="card-title">All Employees</h3>
+                        <h3 class="card-title">Employee Details ({{ $employee->name }})</h3>
                         {{--                        <div>--}}
                         {{--                            <a href="" class="btn btn-outline-primary btn-sm mt-4">View All Deals</a>--}}
                         {{--                        </div>--}}
                     </div>
                     <div class="card-body">
                         @include('layouts.errors')
-                        <div class="table-responsive">
-                            {!! $dataTable->table(['class' => 'table table-hover table-striped table-bordered']) !!}
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
         @endsection
-        @push('page-js')
-            {!! $dataTable->scripts() !!}
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/kt-2.7.0/r-2.3.0/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/datatables.min.js"></script>
-    @endpush
+

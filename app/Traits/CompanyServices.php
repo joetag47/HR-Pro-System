@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 trait CompanyServices
 {
@@ -25,5 +26,18 @@ trait CompanyServices
     public function logCompanyServiceInfo($title, $data)
     {
         Log::channel('company_service')->alert($title, ['message' => $data]);
+    }
+
+    public function performUpload($file, $path)
+    {
+        $file_name = Str::random(15).'.'.$file->getClientOriginalExtension();
+
+        $abs_path = storage_path("app/public/$path");
+
+        $file->move($abs_path, $file_name);
+
+        $path = "storage/$path" . $file_name;
+
+        return $path;
     }
 }

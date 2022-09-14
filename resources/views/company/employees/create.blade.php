@@ -4,6 +4,7 @@
 @endsection
 @push('page-css')
     <link href="{{ asset('assets/css/pages/wizard/wizard-2.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('custom_scripts/css/jq.multiinput.min.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 @section('content')
     <!--begin::Wrapper-->
@@ -31,6 +32,7 @@
             <div class="container">
                 <div class="card card-custom">
                     <div class="card-body p-0">
+                        @include('layouts.errors')
                         <!--begin: Wizard-->
                         <div class="wizard wizard-2" id="kt_wizard" data-wizard-state="first" data-wizard-clickable="false">
                             <!--begin: Wizard Nav-->
@@ -152,29 +154,6 @@
                                         </div>
                                     </div>
                                     <!--end::Wizard Step 5 Nav-->
-                                    <!--begin::Wizard Step 6 Nav-->
-                                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="pending">
-                                        <div class="wizard-wrapper">
-                                            <div class="wizard-icon">
-																<span class="svg-icon svg-icon-2x">
-																	<!--begin::Svg Icon | path:/metronic/theme/html/demo3/dist/assets/media/svg/icons/General/Like.svg-->
-																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																			<rect x="0" y="0" width="24" height="24"></rect>
-																			<path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000"></path>
-																			<rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1"></rect>
-																		</g>
-																	</svg>
-                                                                    <!--end::Svg Icon-->
-																</span>
-                                            </div>
-                                            <div class="wizard-label">
-                                                <h3 class="wizard-title">Completed!</h3>
-                                                <div class="wizard-desc">Review and Submit</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end::Wizard Step 6 Nav-->
                                 </div>
                             </div>
                             <!--end: Wizard Nav-->
@@ -183,7 +162,9 @@
                                 <!--begin: Wizard Form-->
                                 <div class="row">
                                     <div class="offset-xxl-2 col-xxl-8">
-                                        <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form">
+                                        <form class="form fv-plugins-bootstrap fv-plugins-framework employeeForm" id="kt_form" method="POST" enctype="multipart/form-data" action="{{ route('company.employee.store') }}">
+                                            @csrf
+                                            @method('POST')
                                             <!--begin: Wizard Step 1-->
                                             <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                                                 <h4 class="mb-10 font-weight-bold text-dark">Enter your Employee Personal Details</h4>
@@ -192,7 +173,7 @@
                                                     <div class="col-xl-6">
                                                         <div class="form-group fv-plugins-icon-container has-danger">
                                                             <label>Full Name <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg is-invalid" name="full_name" placeholder="First Name" value="">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg is-invalid" name="full_name" placeholder="Full Name" value="{{ old('full_name') }}">
 
                                                         </div>
                                                     </div>
@@ -201,7 +182,7 @@
                                                     <div class="col-xl-6">
                                                     <div class="form-group fv-plugins-icon-container has-danger">
                                                         <label>Email Address <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control form-control-solid form-control-lg is-invalid" name="email" placeholder="Email Address" value="">
+                                                        <input type="text" class="form-control form-control-solid form-control-lg is-invalid" name="email" placeholder="Email Address" value="{{ old('email') }}">
                                                     </div>
                                                     </div>
                                                 </div>
@@ -211,7 +192,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container has-success">
                                                             <label>Date of Birth <span class="text-danger">*</span></label>
-                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="date_of_birth">
+                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="date_of_birth" value="{{ old('date_of_birth') }}">
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
@@ -219,7 +200,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container has-success">
                                                             <label>Place of Birth <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="place_of_birth">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="place_of_birth" value="{{ old('place_of_birth') }}">
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
@@ -229,8 +210,8 @@
                                                             <label>Gender <span class="text-danger">*</span></label>
                                                             <select name="gender" class="form-control">
                                                                 <option value="">--Select Gender--</option>
-                                                                <option value="male">Male</option>
-                                                                <option value="female">Female</option>
+                                                                <option value="male" {{ old('gender') === 'male' ? 'selected' : null }}>Male</option>
+                                                                <option value="female" {{ old('gender') === 'female' ? 'selected' : null }}>Female</option>
                                                             </select>
                                                         </div>
                                                         <!--end::Input-->
@@ -245,8 +226,8 @@
                                                     <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
-                                                            <label>Residential Address <span class="textd-danger">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="residential_address">
+                                                            <label>Residential Address <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="residential_address" value="{{ old('residential_address') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -254,7 +235,7 @@
                                                             <!--begin::Input-->
                                                             <div class="form-group">
                                                                 <label>Digital Address</label>
-                                                                <input type="text" class="form-control form-control-solid form-control-lg" name="digital_address">
+                                                                <input type="text" class="form-control form-control-solid form-control-lg" name="digital_address" value="{{ old('digital_address') }}">
                                                             </div>
                                                             <!--end::Input-->
                                                         </div>
@@ -264,7 +245,7 @@
                                                             <!--begin::Input-->
                                                             <div class="form-group fv-plugins-icon-container">
                                                                 <label>Phone Number <span class="text-danger">*</span></label>
-                                                                <input type="tel" class="form-control form-control-solid form-control-lg" name="phone_number">
+                                                                <input type="tel" class="form-control form-control-solid form-control-lg" name="phone_number" value="{{ old('phone_number') }}">
                                                             </div>
                                                             <!--end::Input-->
                                                         </div>
@@ -274,11 +255,11 @@
                                                                 <label>Identity Type <span class="text-danger">*</span></label>
                                                                 <select name="identity_type" class="form-control">
                                                                     <option value="">--Select Identity Type--</option>
-                                                                    <option value="voters_id">Voter's ID</option>
-                                                                    <option value="passport">Passport</option>
-                                                                    <option value="national_id">National ID</option>
-                                                                    <option value="nhis">NHIS</option>
-                                                                    <option value="drivers_license">Driver's License</option>
+                                                                    <option value="voters_id" {{ old('identity_type') === 'voters_id' ? 'selected' : null }}>Voter's ID</option>
+                                                                    <option value="passport" {{ old('identity_type') === 'passport' ? 'selected' : null }}>Passport</option>
+                                                                    <option value="national_id" {{ old('identity_type') === 'national_id' ? 'selected' : null }}>National ID</option>
+                                                                    <option value="nhis" {{ old('identity_type') === 'nhis' ? 'selected' : null }}>NHIS</option>
+                                                                    <option value="drivers_license" {{ old('identity_type') === 'drivers_license' ? 'selected' : null }}>Driver's License</option>
                                                                 </select>
                                                             </div>
                                                             <!--end::Input-->
@@ -305,7 +286,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Father's Full Name<span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="fathers_name">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="fathers_name" value="{{ old('fathers_name') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -327,7 +308,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Mother's Full Name<span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="mothers_name">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="mothers_name" value="{{ old('mothers_name') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -350,11 +331,11 @@
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Marital Status <span class="text-danger">*</span></label>
                                                             <select name="marital_status" class="form-control">
-                                                                <option value="Married">Married</option>
-                                                                <option value="Single">Single</option>
-                                                                <option value="Divorced">Divorced</option>
-                                                                <option value="Widowed">Widowed</option>
-                                                                <option value="In a Relationship">In a Relationship</option>
+                                                                <option value="Married" {{ old('marital_status') === 'Married' ? 'selected' : null }}>Married</option>
+                                                                <option value="Single" {{ old('marital_status') === 'Single' ? 'selected' : null }}>Single</option>
+                                                                <option value="Divorced" {{ old('marital_status') === 'Divorced' ? 'selected' : null }}>Divorced</option>
+                                                                <option value="Widowed" {{ old('marital_status') === 'Widowed' ? 'selected' : null }}>Widowed</option>
+                                                                <option value="In a Relationship" {{ old('marital_status') === 'In a Relationship' ? 'selected' : null }}>In a Relationship</option>
                                                             </select>
                                                             <!--end::Input-->
                                                         </div>
@@ -362,13 +343,13 @@
                                                     <div class="col-xl-6">
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Number of Children</label>
-                                                            <input type="number" name="children" class="form-control">
+                                                            <input type="number" name="children" class="form-control" value="{{ old('children') }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-6">
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Number of Dependants</label>
-                                                            <input type="number" name="dependants" class="form-control">
+                                                            <input type="number" name="dependants" class="form-control" value="{{ old('dependants') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -380,7 +361,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Full Name</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_name">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_name" value="{{ old('next_of_kin_name') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -388,7 +369,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Relationship</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_relationship">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_relationship" value="{{ old('next_of_kin_relationship') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -396,7 +377,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Address</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_address">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_address" value="{{ old('next_of_kin_address') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -404,7 +385,7 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Telephone</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_phone">
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="next_of_kin_phone" value="{{ old('next_of_kin_phone') }}">
                                                             <!--end::Input-->
                                                         </div>
                                                     </div>
@@ -418,8 +399,8 @@
                                                     <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
-                                                            <label>Date Employed</label>
-                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="date_employed">
+                                                            <label>Date Employed <span class="text-danger">*</span></label>
+                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="date_employed" value="{{ old('date_employed') }}">
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
@@ -427,18 +408,19 @@
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
                                                             <label>Date of Exit</label>
-                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="date_of_exit">
+                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="date_of_exit" value="{{ old('date_of_exit') }}">
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
                                                     <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
-                                                            <label>Department</label>
+                                                            <label>Department <span class="text-danger">*</span></label>
                                                             <select class="form-control" name="department">
                                                                 <option value="">--Select Department</option>
-                                                                <option value="">--Select Department</option>
-                                                                <option value="">--Select Department</option>
+                                                                @foreach($departments as $dept)
+                                                                    <option value="{{ $dept->id }}" {{ old('department') == $dept->id ? 'selected' : null }}>{{ $dept->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <!--end::Input-->
@@ -446,8 +428,8 @@
                                                     <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group">
-                                                            <label>Position</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="position">
+                                                            <label>Position <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="position" value="{{ old('position') }}">
 
                                                         </div>
                                                         <!--end::Input-->
@@ -457,30 +439,9 @@
                                                     <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container">
-                                                            <label>Postcode</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="locpostcode" placeholder="Postcode" value="3072">
-                                                            <span class="form-text text-muted">Please enter your Postcode.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                    <div class="col-xl-6">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>City</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="loccity" placeholder="City" value="Preston">
-                                                            <span class="form-text text-muted">Please enter your City.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xl-6">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>State</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="locstate" placeholder="State" value="VIC">
-                                                            <span class="form-text text-muted">Please enter your state.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
+                                                            <label>Years of Experience</label>
+                                                            <input type="number" class="form-control form-control-solid form-control-lg" name="experience" value="{{ old('experience') }}">
+                                                        </div>
                                                         <!--end::Input-->
                                                     </div>
                                                 </div>
@@ -488,104 +449,59 @@
                                             <!--end: Wizard Step 4-->
                                             <!--begin: Wizard Step 5-->
                                             <div class="pb-5" data-wizard-type="step-content">
-                                                <h4 class="mb-10 font-weight-bold text-dark">Enter your Payment Details</h4>
-                                                <div class="row">
-                                                    <div class="col-xl-6">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>Name on Card</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="ccname" placeholder="Card Name" value="John Wick">
-                                                            <span class="form-text text-muted">Please enter your Card Name.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                    <div class="col-xl-6">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>Card Number</label>
-                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="ccnumber" placeholder="Card Number" value="4444 3333 2222 1111">
-                                                            <span class="form-text text-muted">Please enter your Address.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xl-4">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>Card Expiry Month</label>
-                                                            <input type="number" class="form-control form-control-solid form-control-lg" name="ccmonth" placeholder="Card Expiry Month" value="01">
-                                                            <span class="form-text text-muted">Please enter your Card Expiry Month.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                    <div class="col-xl-4">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>Card Expiry Year</label>
-                                                            <input type="number" class="form-control form-control-solid form-control-lg" name="ccyear" placeholder="Card Expire Year" value="21">
-                                                            <span class="form-text text-muted">Please enter your Card Expiry Year.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                    <div class="col-xl-4">
-                                                        <!--begin::Input-->
-                                                        <div class="form-group fv-plugins-icon-container">
-                                                            <label>Card CVV Number</label>
-                                                            <input type="password" class="form-control form-control-solid form-control-lg" name="cccvv" placeholder="Card CVV Number" value="123">
-                                                            <span class="form-text text-muted">Please enter your Card CVV Number.</span>
-                                                            <div class="fv-plugins-message-container"></div></div>
-                                                        <!--end::Input-->
-                                                    </div>
-                                                </div>
+                                                <h4 class="mb-10 font-weight-bold text-dark">Employee Educational History</h4>
+                                                <textarea class="row" id="education_history" name="education_history[]"></textarea>
+
+{{--                                                    <div class="col-xl-6">--}}
+{{--                                                        <!--begin::Input-->--}}
+{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
+{{--                                                            <label>Name of Institution</label>--}}
+{{--                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="institution">--}}
+{{--                                                        </div>--}}
+{{--                                                        <!--end::Input-->--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-xl-6">--}}
+{{--                                                        <!--begin::Input-->--}}
+{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
+{{--                                                            <label>Address of Institution</label>--}}
+{{--                                                                <input type="address" class="form-control form-control-solid form-control-lg" name="institution_address">--}}
+{{--                                                        </div>--}}
+{{--                                                        <!--end::Input-->--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-xl-6">--}}
+{{--                                                        <!--begin::Input-->--}}
+{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
+{{--                                                            <label>From</label>--}}
+{{--                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="institution_from">--}}
+{{--                                                        </div>--}}
+{{--                                                        <!--end::Input-->--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-xl-6">--}}
+{{--                                                        <!--begin::Input-->--}}
+{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
+{{--                                                            <label>To</label>--}}
+{{--                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="institution_from">--}}
+{{--                                                        </div>--}}
+{{--                                                        <!--end::Input-->--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-xl-12">--}}
+{{--                                                        <!--begin::Input-->--}}
+{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
+{{--                                                            <label>Certificate Degree</label>--}}
+{{--                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="institution_certificate">--}}
+{{--                                                        </div>--}}
+{{--                                                        <!--end::Input-->--}}
+{{--                                                    </div>--}}
                                             </div>
                                             <!--end: Wizard Step 5-->
-                                            <!--begin: Wizard Step 6-->
-                                            <div class="pb-5" data-wizard-type="step-content">
-                                                <!--begin::Section-->
-                                                <h4 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h4>
-                                                <h6 class="font-weight-bolder mb-3">Current Address:</h6>
-                                                <div class="text-dark-50 line-height-lg">
-                                                    <div>Address Line 1</div>
-                                                    <div>Address Line 2</div>
-                                                    <div>Melbourne 3000, VIC, Australia</div>
-                                                </div>
-                                                <div class="separator separator-dashed my-5"></div>
-                                                <!--end::Section-->
-                                                <!--begin::Section-->
-                                                <h6 class="font-weight-bolder mb-3">Delivery Details:</h6>
-                                                <div class="text-dark-50 line-height-lg">
-                                                    <div>Package: Complete Workstation (Monitor, Computer, Keyboard &amp; Mouse)</div>
-                                                    <div>Weight: 25kg</div>
-                                                    <div>Dimensions: 110cm (w) x 90cm (h) x 150cm (L)</div>
-                                                </div>
-                                                <div class="separator separator-dashed my-5"></div>
-                                                <!--end::Section-->
-                                                <!--begin::Section-->
-                                                <h6 class="font-weight-bolder mb-3">Delivery Service Type:</h6>
-                                                <div class="text-dark-50 line-height-lg">
-                                                    <div>Overnight Delivery with Regular Packaging</div>
-                                                    <div>Preferred Morning (8:00AM - 11:00AM) Delivery</div>
-                                                </div>
-                                                <div class="separator separator-dashed my-5"></div>
-                                                <!--end::Section-->
-                                                <!--begin::Section-->
-                                                <h6 class="font-weight-bolder mb-3">Delivery Address:</h6>
-                                                <div class="text-dark-50 line-height-lg">
-                                                    <div>Address Line 1</div>
-                                                    <div>Address Line 2</div>
-                                                    <div>Preston 3072, VIC, Australia</div>
-                                                </div>
-                                                <!--end::Section-->
-                                            </div>
-                                            <!--end: Wizard Step 6-->
+
                                             <!--begin: Wizard Actions-->
                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                 <div class="mr-2">
                                                     <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
                                                 </div>
                                                 <div>
-                                                    <button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                                                    <button type="submit" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
                                                     <button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
                                                 </div>
                                             </div>
@@ -612,4 +528,51 @@
 @endsection
 @push('page-js')
             <script src="{{ asset('custom_scripts/js/employee_form.js') }}"></script>
+            <script src="{{ asset('custom_scripts/js/jq.multiinput.min.js') }}"></script>
+            <script>
+                $('#education_history').multiInput({
+                    json: true,
+                    input: $(`<div class="row"><div class="col-xl-10">
+                        <div class="form-group fv-plugins-icon-container">
+                    <label>Name of Institution</label>
+                    <input type="text" class="form-control form-control-solid form-control-lg" name="institution">
+                </div>
+                </div>
+                <div class="col-xl-10">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>Address of Institution</label>
+                        <input type="address" class="form-control form-control-solid form-control-lg" name="institution_address">
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>From</label>
+                        <input type="date" class="form-control form-control-solid form-control-lg" name="institution_from">
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>To</label>
+                        <input type="date" class="form-control form-control-solid form-control-lg" name="institution_to">
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>Certificate Degree</label>
+                        <input type="text" class="form-control form-control-solid form-control-lg" name="institution_certificate">
+                    </div>
+                </div></div>`),
+                    addButtonHtml:'<a class="add" style="margin-top: 10px; cursor: pointer;"><i class="fa fa-lg fa-plus-circle"></i><span class="sr-only">' +  +'</span></a>',
+                    removeButtonHtml:'<a class="remove" style="margin-top: 10px; cursor: pointer;"><i class="fa fa-lg fa-minus-circle"></i><span class="sr-only">' +  +'</span></a>',
+                    limit: 10,
+                    onElementAdd: function (el, plugin) {
+                        // console.log(plugin.elementCount);
+                    },
+                    onElementRemove: function (el, plugin) {
+                        // console.log(plugin.elementCount);
+                    }
+                });
+
+
+            </script>
     @endpush

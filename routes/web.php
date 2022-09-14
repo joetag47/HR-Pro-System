@@ -41,5 +41,7 @@ Route::prefix('company/profile')->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('company.employee.index');
         Route::get('create', [EmployeeController::class, 'create'])->name('company.employee.create');
         Route::post('store', [EmployeeController::class, 'store'])->name('company.employee.store');
+        Route::get('{employee}/details', [EmployeeController::class, 'details'])->name('company.employee.details');
+        Route::any('{employee}/delete', [EmployeeController::class, 'delete'])->name('company.employee.delete');
     });
 });

@@ -77,6 +77,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         url = $(this).attr('action');
+
         let type = $(this).attr('title');
 
         formData = new FormData(this);

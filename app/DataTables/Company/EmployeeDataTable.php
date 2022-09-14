@@ -2,7 +2,9 @@
 
 namespace App\DataTables\Company;
 
+use App\Models\Company\Employee;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -21,18 +23,31 @@ class EmployeeDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'company/employeedatatable.action');
+            ->editColumn('created_at', function ($query){
+                return date('Y-m-d', strtotime($query->created_at));
+            })
+            ->editColumn('department_id', function ($query) {
+                return $query->department->name ?? 'N/A';
+            })
+            ->editColumn('position', function ($query) {
+                return $query->position ?? 'N/A';
+            })
+            ->addColumn('action', function ($query){
+                return '<div style="display:inline-flex;">
+                        <a class="btn btn-sm btn-icon mr-2 btn-circle btn-primary btn-shadow" href="'.route('company.employee.details', $query->id).'"><i class="fa fa-eye fa-sm"></i></a>
+                        <a class="btn btn-sm btn-icon btn-circle btn-danger btn-shadow deleteBtn" href="'.route('company.employee.delete', $query->id).'"><i class="fa fa-trash fa-sm"></i></a>
+                    </div>';
+            });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Company/EmployeeDataTable $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     public function query()
     {
-        $query = User::query()->orderBy('id', 'desc');
+        $query = Employee::query()->where('company_id', auth()->user()->company_id)->orderBy('id', 'desc');
 
         return $this->applyScopes($query);
     }
@@ -62,7 +77,8 @@ class EmployeeDataTable extends DataTable
             Column::make('name'),
             Column::make('email'),
             Column::make('department_id')->title('Department'),
-            Column::make('created_at'),
+            Column::make('position'),
+            Column::make('created_at')->title('Date Created'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
