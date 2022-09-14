@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Company\Department;
+use App\Models\Company\Employee;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -27,7 +28,7 @@ class CompanyServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(['layouts.tab_panes.company_profile_pane'], function ($view) {
-            $employee_count = User::query()->where('company_id', auth()->user()->company_id)->count();
+            $employee_count = Employee::query()->where('company_id', auth()->user()->company_id)->count();
 
             $department_count = Department::query()->where('company_id', auth()->user()->company_id)->count();
 
