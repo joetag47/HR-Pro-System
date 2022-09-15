@@ -98,7 +98,26 @@ class EmployeeController extends Controller
 
     public function delete(Employee $employee)
     {
-        return $employee;
+        DB::beginTransaction();
+        try {
+
+            DB::table('employee_education')->where('employee_id', $employee->id)->delete();
+
+            $employee->delete();
+
+            DB::commit();
+
+            return $this->successResponse('Employee deleted successfully');
+
+        } catch (\Exception $e){
+
+            DB::rollBack();
+
+            $this->logCompanyServiceInfo(':: EMPLOYEE DELETE ERROR ::', "{$e->getMessage()} :: {$e->getLine()}");
+
+            return back()->withInput()->withErrors('Employee could not be created. Kindly try again');
+
+        }
     }
 
     public function validateEmployee()

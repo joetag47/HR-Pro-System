@@ -35,7 +35,7 @@ class EmployeeDataTable extends DataTable
             ->addColumn('action', function ($query){
                 return '<div style="display:inline-flex;">
                         <a class="btn btn-sm btn-icon mr-2 btn-circle btn-primary btn-shadow" href="'.route('company.employee.details', $query->id).'"><i class="fa fa-eye fa-sm"></i></a>
-                        <a class="btn btn-sm btn-icon btn-circle btn-danger btn-shadow deleteBtn" href="'.route('company.employee.delete', $query->id).'"><i class="fa fa-trash fa-sm"></i></a>
+                        <a class="btn btn-sm btn-icon btn-circle btn-danger btn-shadow" id="deleteBtn" href="'.route('company.employee.delete', $query->id).'"><i class="fa fa-trash fa-sm"></i></a>
                     </div>';
             });
     }
