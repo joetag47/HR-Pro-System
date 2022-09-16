@@ -62,7 +62,7 @@ class EmployeeController extends Controller
 
             $employee = Employee::query()->create($this->dumpEmployee($data));
 
-            if (!empty($data['education_history'][0])){
+            if (!empty($data['education_history'])){
 
                 foreach (json_decode($data['education_history'][0]) as $history) {
 
@@ -124,7 +124,7 @@ class EmployeeController extends Controller
     {
         return [
             'full_name' => 'required',
-            'email' => 'required|email|unique:employees:email',
+            'email' => 'required|email|unique:employees,email',
             'date_of_birth' => 'required',
             'place_of_birth' => 'required',
             'gender' => 'required',
