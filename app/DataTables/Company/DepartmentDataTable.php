@@ -41,6 +41,7 @@ class DepartmentDataTable extends DataTable
      */
     public function query()
     {
+
         $query = Department::query()->where('company_id', auth()->user()->company->id)->orderBy('id', 'DESC');
 
         return $this->applyScopes($query);

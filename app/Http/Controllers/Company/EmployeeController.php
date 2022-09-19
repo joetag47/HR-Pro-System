@@ -11,6 +11,7 @@ use App\Traits\CompanyServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
@@ -96,6 +97,92 @@ class EmployeeController extends Controller
         return view('company.employees.details', compact('employee'));
     }
 
+    public function edit(Employee $employee)
+    {
+        $departments = Department::query()->where('company_id', auth()->user()->company_id)->orderBy('id', 'DESC')->get();
+
+        $history_collection = collect();
+
+        if (!empty($employee->education)){
+            foreach ($employee->education as $education){
+                $history_collection->push([
+                    'institution' => $education->institution,
+                    'institution_address' => $education->address,
+                    'institution_from' => $education->from,
+                    'institution_to' => $education->to,
+                    'institution_certificate' => $education->certificate,
+                ]);
+            }
+        }
+
+        return view('company.employees.edit', compact('employee', 'departments', 'history_collection'));
+    }
+
+    public function update(Request $request, Employee $employee)
+    {
+        $data = $request->all();
+
+        $validate = Validator::make($data, $this->validateEmployee($employee->id));
+
+        if ($validate->fails())
+            return back()->withInput()->withErrors($validate->errors()->first());
+
+
+        DB::beginTransaction();
+
+        try {
+
+            if (!empty($request->file('id_file'))) {
+
+                if (File::exists($employee->id_file))
+                    File::delete($employee->id_file);
+
+                $data['id_file'] = $this->performUpload($request->file('id_file'), 'employee/id/');
+
+            }else{
+
+                $data['id_file'] = null;
+            }
+
+            $employee->update($this->dumpEmployee($data));
+
+            if (!empty($data['education_history'])){
+
+                foreach (json_decode($data['education_history'][0]) as $history) {
+
+                    $education = EmployeeEducation::query()->where('employee_id', $employee->id)->where('institution', (array)$history->institution)->first();
+
+                    if (!empty($education))
+                        $education->update($this->dumpWorkExperience((array) $history, $employee->id));
+                    else
+                        EmployeeEducation::query()->create($this->dumpWorkExperience((array) $history, $employee->id));
+
+                }
+
+            }
+
+            DB::commit();
+
+            session()->flash('success', "Employee: $employee->name successfully created.");
+
+            return redirect()->route('company.employee.index');
+
+        } catch (\Exception $e){
+
+            DB::rollBack();
+
+            $this->logCompanyServiceInfo(':: EMPLOYEE UPDATE ERROR ::', "{$e->getMessage()} :: {$e->getLine()}");
+
+            return back()->withInput()->withErrors('Employee could not be updated. Kindly try again');
+        }
+    }
+
+
+    public function removeHistory(EmployeeEducation $education)
+    {
+        return $education;
+    }
+
     public function delete(Employee $employee)
     {
         DB::beginTransaction();
@@ -120,11 +207,11 @@ class EmployeeController extends Controller
         }
     }
 
-    public function validateEmployee()
+    public function validateEmployee($id = null)
     {
         return [
             'full_name' => 'required',
-            'email' => 'required|email|unique:employees,email',
+            'email' => 'required|email|unique:employees,email,'.$id,
             'date_of_birth' => 'required',
             'place_of_birth' => 'required',
             'gender' => 'required',

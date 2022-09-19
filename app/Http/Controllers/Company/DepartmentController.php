@@ -8,6 +8,7 @@ use App\Models\Company\Department;
 use App\Traits\CompanyServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
@@ -96,6 +97,9 @@ class DepartmentController extends Controller
     {
         DB::beginTransaction();
         try {
+
+            DB::table('employees')->where('department_id', $department->id)
+                ->update(['department_id' => null]);
 
             DB::table('users')->where('department_id', $department->id)
                 ->update(['department_id' => null]);

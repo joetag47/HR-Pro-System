@@ -158,4 +158,6 @@ $(document).ready(function () {
         e.preventDefault();
         promptDialog($(this).attr('href'), 'department');
     });
+
+
 })
