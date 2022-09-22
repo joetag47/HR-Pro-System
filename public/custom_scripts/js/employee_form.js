@@ -258,6 +258,13 @@ _formEl,
                 }
             }
         },
+        job_description: {
+            validators: {
+                notEmpty: {
+                    message: 'Job Description field is required'
+                }
+            }
+        },
     },
     plugins: {
         trigger: new FormValidation.plugins.Trigger(),

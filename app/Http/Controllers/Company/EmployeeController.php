@@ -51,7 +51,6 @@ class EmployeeController extends Controller
 
             $education_collection = collect();
 
-
             if (!empty($request->file('id_file'))) {
 
                 $data['id_file'] = $this->performUpload($request->file('id_file'), 'employee/id/');
@@ -59,6 +58,15 @@ class EmployeeController extends Controller
             }else{
 
                 $data['id_file'] = null;
+            }
+
+            if (!empty($request->file('profile_picture'))) {
+
+                $data['profile_picture'] = $this->performUpload($request->file('profile_picture'), 'employee/profile_picture/');
+
+            }else{
+
+                $data['profile_picture'] = null;
             }
 
             $employee = Employee::query()->create($this->dumpEmployee($data));
@@ -141,8 +149,22 @@ class EmployeeController extends Controller
 
             }else{
 
-                $data['id_file'] = null;
+                $data['id_file'] = $employee->id_file;
             }
+
+            if (!empty($request->file('profile_picture'))) {
+
+                if (File::exists($employee->profile_picture))
+                    File::delete($employee->profile_picture);
+
+                $data['profile_picture'] = $this->performUpload($request->file('profile_picture'), 'employee/profile_picture/');
+
+            }else{
+
+                $data['profile_picture'] = null;
+            }
+
+
 
             $employee->update($this->dumpEmployee($data));
 
@@ -225,6 +247,7 @@ class EmployeeController extends Controller
             'date_employed' => 'required',
             'department' => 'required',
             'position' => 'required',
+            'job_description' => 'required'
         ];
     }
 
@@ -241,33 +264,6 @@ class EmployeeController extends Controller
             'updated_at' => now(),
         ];
     }
-    //        full_name
-//email
-//date_of_birth
-//place_of_birth
-//gender
-//residential_address
-//digital_address
-//phone_number
-//identity_type
-//id_file
-//fathers_name
-//father_deceased
-//mothers_name
-//mother_deceased
-//marital_status
-//children
-//dependants
-//next_of_kin_name
-//next_of_kin_relationship
-//next_of_kin_address
-//next_of_kin_phone
-//date_employed
-//date_of_exit
-//department
-//position
-//experience
-//        work_experience
 
     public function dumpEmployee($data)
     {
@@ -298,6 +294,8 @@ class EmployeeController extends Controller
             'date_of_exit' => $data['date_of_exit'],
             'department_id' => $data['department'],
             'position' => $data['position'],
+            'profile_picture' => $data['profile_picture'],
+            'job_description' => $data['job_description'],
             'experience' => $data['experience'],
         ];
     }

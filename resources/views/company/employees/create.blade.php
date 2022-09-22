@@ -204,7 +204,7 @@
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
-                                                    <div class="col-xl-7">
+                                                    <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container has-success">
                                                             <label>Gender <span class="text-danger">*</span></label>
@@ -216,6 +216,15 @@
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
+                                                    <div class="col-xl-6">
+                                                        <!--begin::Input-->
+                                                        <div class="form-group fv-plugins-icon-container">
+                                                            <label>Profile Picture </label>
+                                                            <input type="file" class="form-control form-control-solid form-control-lg" name="profile_picture">
+                                                        </div>
+                                                        <!--end::Input-->
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <!--end: Wizard Step 1-->
@@ -274,14 +283,7 @@
                                                             </div>
                                                             <!--end::Input-->
                                                         </div>
-                                                        <div class="col-xl-6">
-                                                            <!--begin::Input-->
-                                                            <div class="form-group fv-plugins-icon-container">
-                                                                <label>Profile Picture </label>
-                                                                <input type="file" class="form-control form-control-solid form-control-lg" name="profile_picture">
-                                                            </div>
-                                                            <!--end::Input-->
-                                                        </div>
+
                                                     </div>
                                             </div>
                                             <!--end: Wizard Step 2-->
@@ -442,6 +444,14 @@
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
+                                                    <div class="col-xl-12">
+                                                        <!--begin::Input-->
+                                                        <div class="form-group fv-plugins-icon-container">
+                                                            <label>Job Description <span class="text-danger">*</span></label>
+                                                            <textarea class="form-control form-control-solid form-control-lg" name="job_description">{{ old('job_description') }}</textarea>
+                                                        </div>
+                                                        <!--end::Input-->
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xl-6">
@@ -460,46 +470,6 @@
                                                 <h4 class="mb-10 font-weight-bold text-dark">Employee Educational History</h4>
                                                 <textarea class="row" id="education_history" name="education_history[]"></textarea>
 
-{{--                                                    <div class="col-xl-6">--}}
-{{--                                                        <!--begin::Input-->--}}
-{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
-{{--                                                            <label>Name of Institution</label>--}}
-{{--                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="institution">--}}
-{{--                                                        </div>--}}
-{{--                                                        <!--end::Input-->--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-xl-6">--}}
-{{--                                                        <!--begin::Input-->--}}
-{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
-{{--                                                            <label>Address of Institution</label>--}}
-{{--                                                                <input type="address" class="form-control form-control-solid form-control-lg" name="institution_address">--}}
-{{--                                                        </div>--}}
-{{--                                                        <!--end::Input-->--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-xl-6">--}}
-{{--                                                        <!--begin::Input-->--}}
-{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
-{{--                                                            <label>From</label>--}}
-{{--                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="institution_from">--}}
-{{--                                                        </div>--}}
-{{--                                                        <!--end::Input-->--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-xl-6">--}}
-{{--                                                        <!--begin::Input-->--}}
-{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
-{{--                                                            <label>To</label>--}}
-{{--                                                            <input type="date" class="form-control form-control-solid form-control-lg" name="institution_from">--}}
-{{--                                                        </div>--}}
-{{--                                                        <!--end::Input-->--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-xl-12">--}}
-{{--                                                        <!--begin::Input-->--}}
-{{--                                                        <div class="form-group fv-plugins-icon-container">--}}
-{{--                                                            <label>Certificate Degree</label>--}}
-{{--                                                            <input type="text" class="form-control form-control-solid form-control-lg" name="institution_certificate">--}}
-{{--                                                        </div>--}}
-{{--                                                        <!--end::Input-->--}}
-{{--                                                    </div>--}}
                                             </div>
                                             <!--end: Wizard Step 5-->
 

@@ -206,7 +206,7 @@
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
-                                                    <div class="col-xl-7">
+                                                    <div class="col-xl-6">
                                                         <!--begin::Input-->
                                                         <div class="form-group fv-plugins-icon-container has-success">
                                                             <label>Gender <span class="text-danger">*</span></label>
@@ -215,6 +215,14 @@
                                                                 <option value="male" {{ old('gender') || $employee->gender === 'male' ? 'selected' : null }}>Male</option>
                                                                 <option value="female" {{ old('gender') || $employee->gender === 'female' ? 'selected' : null }}>Female</option>
                                                             </select>
+                                                        </div>
+                                                        <!--end::Input-->
+                                                    </div>
+                                                    <div class="col-xl-6">
+                                                        <!--begin::Input-->
+                                                        <div class="form-group fv-plugins-icon-container">
+                                                            <label>Profile Picture </label>
+                                                            <input type="file" class="form-control form-control-solid form-control-lg" name="profile_picture">
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>
@@ -433,6 +441,14 @@
                                                             <label>Position <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control form-control-solid form-control-lg" name="position" value="{{ old('position') ?? $employee->position }}">
 
+                                                        </div>
+                                                        <!--end::Input-->
+                                                    </div>
+                                                    <div class="col-xl-12">
+                                                        <!--begin::Input-->
+                                                        <div class="form-group fv-plugins-icon-container">
+                                                            <label>Job Description <span class="text-danger">*</span></label>
+                                                            <textarea class="form-control form-control-solid form-control-lg" name="job_description">{{ old('job_description') ?? $employee->job_description }}</textarea>
                                                         </div>
                                                         <!--end::Input-->
                                                     </div>

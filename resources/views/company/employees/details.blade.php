@@ -53,9 +53,11 @@
                         <div class="d-flex mb-9">
                             <!--begin: Pic-->
                             <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
+                                @if(!empty($employee->profile_picture))
                                 <div class="symbol symbol-50 symbol-lg-120">
-                                    <img src="https://preview.keenthemes.com/metronic/theme/html/demo3/dist/assets/media/users/300_1.jpg" alt="image">
+                                    <img src="{{ asset($employee->profile_picture) }}" alt="image">
                                 </div>
+                                @endif
                                 <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
                                     <span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
                                 </div>
@@ -72,7 +74,7 @@
                                         </a>
                                     </div>
                                     <div class="my-lg-0 my-3">
-                                        <a href="#" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3"><span class="fa fa-edit"></span>Update</a>
+                                        <a href="{{ route('company.employee.edit', $employee->id) }}" class="btn btn-sm btn-light-warning font-weight-bolder text-uppercase mr-3"><span class="fa fa-edit"></span>Update</a>
                                     </div>
                                 </div>
                                 <!--end::Title-->
@@ -176,6 +178,7 @@
                                             <tr><td style="width: 200px; font-weight: bold;">Department</td><td>{{ $employee->department->name ?? null }}</td></tr>
                                             <tr><td style="width: 200px; font-weight: bold;">Position</td><td>{{ $employee->position  }}</td></tr>
                                             <tr><td style="width: 200px; font-weight: bold;">Years of Experience</td><td>{{ $employee->experience  }}</td></tr>
+                                            <tr><td style="width: 200px; font-weight: bold;">Job Description</td><td>{{ $employee->job_description  }}</td></tr>
                                         </table>
                                     </div>
                                 </div>
