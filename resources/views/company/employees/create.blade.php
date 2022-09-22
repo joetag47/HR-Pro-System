@@ -274,6 +274,14 @@
                                                             </div>
                                                             <!--end::Input-->
                                                         </div>
+                                                        <div class="col-xl-6">
+                                                            <!--begin::Input-->
+                                                            <div class="form-group fv-plugins-icon-container">
+                                                                <label>Profile Picture </label>
+                                                                <input type="file" class="form-control form-control-solid form-control-lg" name="profile_picture">
+                                                            </div>
+                                                            <!--end::Input-->
+                                                        </div>
                                                     </div>
                                             </div>
                                             <!--end: Wizard Step 2-->
