@@ -165,6 +165,34 @@
                                             <tr><td style="width: 200px; font-weight: bold;">Number of Dependants</td><td>{{ $employee->dependants  }}</td></tr>
                                         </table>
                                     </div>
+
+                                    @if(!empty($employee->children))
+                                        @php $children_count = 0; @endphp
+                                            <!--begin::Accordion-->
+                                        <div class="accordion accordion-solid accordion-toggle-plus" id="childrenAccordion">
+                                            @foreach($employee->getChildren as $child)
+                                                @php $children_count++ @endphp
+                                                <div class="card">
+                                                    <div class="card-header" id="headingOne6">
+                                                        <div class="card-title" data-toggle="collapse" data-target="#collapse{{ $children_count }}">
+                                                            <i class="flaticon-pie-chart-1"></i>Experience #{{ $children_count }}</div>
+                                                    </div>
+                                                    <div id="collapse{{ $children_count }}" class="collapse {{ $children_count === 1 ? 'show' : null }}" data-parent="#childrenAccordion">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table col-md-7 table-bordered">
+                                                                    <tr><td style="width: 200px; font-weight: bold;">Name</td><td>{{ $child->name }}</td></tr>
+                                                                    <tr><td style="width: 200px; font-weight: bold;">Date of Birth</td><td>{{ $child->dob }}</td></tr>
+                                                                    <tr><td style="width: 200px; font-weight: bold;">Gender</td><td>{{ $child->gender }}</td></tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>

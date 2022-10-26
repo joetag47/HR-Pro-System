@@ -71,16 +71,39 @@ class EmployeeController extends Controller
 
             $employee = Employee::query()->create($this->dumpEmployee($data));
 
-            if (!empty($data['education_history'])){
 
-                foreach (json_decode($data['education_history'][0]) as $history) {
+            if (!empty($data['education_history']) && !empty((array)$data['education_history'][0])){
 
-                    $education_collection->push($this->dumpWorkExperience((array)$history, $employee->id));
+                foreach (json_decode($data['education_history'][0], true) as $history) {
+
+                    if (!empty($history['institution']))
+                        $education_collection->push($this->dumpWorkExperience((array)$history, $employee->id));
                 }
+
+                if (!empty($education_collection))
+                    DB::table('employee_education')->insert($education_collection->toArray());
 
             }
 
-            DB::table('employee_education')->insert($education_collection->toArray());
+
+            $children_collection = collect();
+
+            if (!empty($data['children_list']) && !empty((array)$data['children_list'][0])){
+
+                foreach (json_decode($data['children_list'][0], true) as $children) {
+
+                    if (!empty($children['child_name']) && !empty($children['child_dob'])  && !empty($children['child_gender'])){
+
+                        $children_collection->push($this->dumpChildren((array)$children, $employee->id));
+                    }
+
+                }
+
+                if (!empty($children_collection))
+                    DB::table('employee_childrens')->insert($children_collection->toArray());
+
+            }
+
 
             DB::commit();
 
@@ -183,6 +206,8 @@ class EmployeeController extends Controller
 
             }
 
+
+
             DB::commit();
 
             session()->flash('success', "Employee: $employee->name successfully created.");
@@ -262,6 +287,16 @@ class EmployeeController extends Controller
             'certificate' => $data['institution_certificate'] ?? null,
             'created_at' => now(),
             'updated_at' => now(),
+        ];
+    }
+
+    public function dumpChildren($data, $employee)
+    {
+        return [
+            'employee_id' => $employee,
+            'name' => $data['child_name'] ?? null,
+            'dob' => $data['child_dob'] ?? null,
+            'gender' => $data['child_gender'] ?? null,
         ];
     }
 
