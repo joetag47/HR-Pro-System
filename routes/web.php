@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\userManagementController;
 use App\Http\Controllers\Company\DepartmentController;
 use App\Http\Controllers\Company\EmployeeController;
-use App\Http\Controllers\userManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
