@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Company\DepartmentController;
 use App\Http\Controllers\Company\EmployeeController;
 use App\Http\Controllers\userManagementController;
@@ -56,5 +58,7 @@ Route::prefix('users')->group(function () {
     #=================================== USER MANAGEMENT ROUTES =============================================#
     Route::prefix('userManagement')->group(function () {
         Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
+        Route::resource('/roles', RoleController::class);
+        Route::resource('permissions', PermissionController::class);
     });
 });
