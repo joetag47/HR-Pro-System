@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+//Middleware role auth added
 Route::get('/', function () {
     return view('auth.login');
 })->middleware(['auth', 'role:admin'])->name('home');
