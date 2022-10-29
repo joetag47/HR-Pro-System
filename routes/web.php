@@ -56,7 +56,7 @@ Route::prefix('company/profile')->group(function () {
 Route::prefix('users')->group(function () {
 
     #=================================== USER MANAGEMENT ROUTES =============================================#
-    Route::prefix('userManagement')->group(function () {
+    Route::prefix('roles-and-permissions')->group(function () {
         Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
         Route::resource('/roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
