@@ -23,8 +23,9 @@ class UserSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         User::query()->create([
-            'name' => 'Super Admin',
-            'email' => 'admin@example.com',
+            'name' => 'User',
+            'email' => 'user@example.com',
+            'email_verified_at' => now(),
             'password' => bcrypt('admin123'),
             'company_id' => 1
         ]);
