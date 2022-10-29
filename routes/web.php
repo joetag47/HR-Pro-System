@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\userManagementController;
 use App\Http\Controllers\Company\DepartmentController;
 use App\Http\Controllers\Company\EmployeeController;
+use App\Http\Controllers\userManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -56,12 +56,5 @@ Route::prefix('users')->group(function () {
     #=================================== USER MANAGEMENT ROUTES =============================================#
     Route::prefix('userManagement')->group(function () {
         Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
-    //        Route::get('create', [EmployeeController::class, 'create'])->name('company.employee.create');
-    //        Route::post('store', [EmployeeController::class, 'store'])->name('company.employee.store');
-    //        Route::get('{employee}/edit', [EmployeeController::class, 'edit'])->name('company.employee.edit');
-    //        Route::post('{employee}/update', [EmployeeController::class, 'update'])->name('company.employee.update');
-    //        Route::get('{employee}/details', [EmployeeController::class, 'details'])->name('company.employee.details');
-    //        Route::any('{employee}/delete', [EmployeeController::class, 'delete'])->name('company.employee.delete');
-    //        Route::any('{education}/history/delete', [EmployeeController::class, 'removeHistory'])->name('company.employee.remove.history');
     });
 });
