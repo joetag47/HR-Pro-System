@@ -26,21 +26,21 @@
                     </div>
                     <!--end::Info-->
                     <!--begin::Toolbar-->
-{{--                    <div class="d-flex align-items-center flex-wrap">--}}
-{{--                        <!--begin::Button-->--}}
-{{--                        <a href="#" class="btn btn-primary btn-shadow" data-toggle="modal" data-target="#departmentAddModal">--}}
-{{--                            <i class="flaticon-plus"></i> Add User--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
+                    <div class="d-flex align-items-center flex-wrap">
+                        <!--begin::Button-->
+                        <a href="#" class="btn btn-primary btn-shadow" data-toggle="modal" data-target="#departmentAddModal">
+                            <i class="flaticon-plus"></i> Add User
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="container">
                 <div class="card card-custom gutter-b example example-compact shadow-lg">
                     <div class="card-header">
                         <h3 class="card-title">All Users</h3>
-                        {{--                        <div>--}}
-                        {{--                            <a href="" class="btn btn-outline-primary btn-sm mt-4">View All Deals</a>--}}
-                        {{--                        </div>--}}
+                        <div>
+                            <a href="" class="btn btn-outline-primary btn-sm mt-4">View All Users</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
