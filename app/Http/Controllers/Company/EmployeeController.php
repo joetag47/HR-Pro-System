@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company\Department;
 use App\Models\Company\Employee;
 use App\Models\Company\EmployeeEducation;
+use App\Models\EmployeeChildren;
 use App\Traits\CompanyServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -134,6 +135,18 @@ class EmployeeController extends Controller
 
         $history_collection = collect();
 
+        $children_collection = collect();
+
+        if (!empty($employee->getChildren)){
+            foreach ($employee->getChildren as $child){
+                $children_collection->push([
+                    'child_name' => $child->name,
+                    'child_dob' => $child->dob,
+                    'child_gender' => $child->gender,
+                ]);
+            }
+        }
+
         if (!empty($employee->education)){
             foreach ($employee->education as $education){
                 $history_collection->push([
@@ -146,7 +159,7 @@ class EmployeeController extends Controller
             }
         }
 
-        return view('company.employees.edit', compact('employee', 'departments', 'history_collection'));
+        return view('company.employees.edit', compact('employee', 'children_collection', 'departments', 'history_collection'));
     }
 
     public function update(Request $request, Employee $employee)
@@ -184,12 +197,13 @@ class EmployeeController extends Controller
 
             }else{
 
-                $data['profile_picture'] = null;
+                $data['profile_picture'] = $employee->profile_picture;
             }
 
 
 
             $employee->update($this->dumpEmployee($data));
+
 
             if (!empty($data['education_history'])){
 
@@ -206,6 +220,25 @@ class EmployeeController extends Controller
 
             }
 
+            DB::table('employee_childrens')->where('employee_id', $employee->id)->delete();
+
+            $children_collection = collect();
+
+            if (!empty($data['children_list']) && !empty((array)$data['children_list'][0])){
+
+                foreach (json_decode($data['children_list'][0], true) as $children) {
+
+                    if (!empty($children['child_name']) && !empty($children['child_dob'])  && !empty($children['child_gender'])){
+
+                        $children_collection->push($this->dumpChildren((array)$children, $employee->id));
+                    }
+
+                }
+
+                if (!empty($children_collection))
+                    DB::table('employee_childrens')->insert($children_collection->toArray());
+
+            }
 
 
             DB::commit();

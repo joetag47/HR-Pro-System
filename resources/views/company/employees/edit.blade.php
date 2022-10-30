@@ -363,6 +363,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <h4 class="mb-10 font-weight-bold text-dark">Children</h4><br>
+                                                <textarea class="row" id="children_list" name="children_list[]">{{ $children_collection }}</textarea>
                                                 <!--end::Select-->
 
                                                 <h4 class="mb-10 font-weight-bold text-dark">Next of Kin Details</h4>
@@ -511,6 +513,41 @@
             <script src="{{ asset('custom_scripts/js/employee_form.js') }}"></script>
             <script src="{{ asset('custom_scripts/js/jq.multiinput.min.js') }}"></script>
             <script>
+                $('#children_list').multiInput({
+                    json: true,
+                    input: $(`<div class="row"><div class="col-xl-4">
+                        <div class="form-group fv-plugins-icon-container">
+                    <label>Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-solid form-control-lg" name="child_name">
+                </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>Date of Birth <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control form-control-solid form-control-lg" name="child_dob">
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>Gender <span class="text-danger">*</span></label>
+                        <select class="form-control" name="child_gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                </div>`),
+                    addButtonHtml:'<a class="add" style="margin-top: 10px;margin-right: -10%; cursor: pointer;"><i class="fa fa-lg fa-plus-circle"></i><span class="sr-only">' +  +'</span></a>',
+                    removeButtonHtml:'<a class="remove" style="margin-top: 10px; margin-right: -10%; cursor: pointer;"><i class="fa fa-lg fa-minus-circle"></i><span class="sr-only">' +  +'</span></a>',
+                    limit: 10,
+                    onElementAdd: function (el, plugin) {
+                        // console.log(plugin.elementCount);
+                    },
+                    onElementRemove: function (el, plugin) {
+                        // console.log(plugin.elementCount);
+                    }
+                })
+
                 $('#education_history').multiInput({
                     json: true,
                     input: $(`<div class="row"><div class="col-xl-10">
