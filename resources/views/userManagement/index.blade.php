@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-{{--                            {!! $dataTable->table(['class' => 'table table-hover']) !!}--}}
+                            {!! $dataTable->table(['class' => 'table table-hover']) !!}
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
         </div>
         @endsection
         @push('page-js')
-{{--            {!! $dataTable->scripts() !!}--}}
+            {!! $dataTable->scripts() !!}
             {{--            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>--}}
             <script type="text/javascript" src="{{ asset('Datatable/pdfmake.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('Datatable/pdfmake_font.js') }}"></script>

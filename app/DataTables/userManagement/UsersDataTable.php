@@ -36,13 +36,13 @@ class UsersDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Company/DepartmentDataTable $model
+     * @param \App\Models\User/UsersDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
 
-        $query = User::all()->orderBy('id', 'DESC');
+        $query = User::query()->where('company_id', auth()->user()->company->id)->orderBy('id', 'DESC');
 
         return $this->applyScopes($query);
     }
@@ -70,7 +70,9 @@ class UsersDataTable extends DataTable
     {
         return [
             Column::make('name'),
-            Column::make('description'),
+            Column::make('email'),
+            Column::make('company_id'),
+            Column::make('department_id'),
             Column::make('created_at')->title('Date Created'),
             Column::computed('action')
                 ->exportable(false)
@@ -87,6 +89,6 @@ class UsersDataTable extends DataTable
      */
     protected function filename()
     {
-        return auth()->user()->company->name. '_Departments_' . date('YmdHis');
+        return User::all(). '_Users_' . date('YmdHis');
     }
 }

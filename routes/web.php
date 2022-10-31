@@ -58,6 +58,7 @@ Route::prefix('users')->group(function () {
     #=================================== USER MANAGEMENT ROUTES =============================================#
     Route::prefix('roles-and-permissions')->group(function () {
         Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
+        Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
         Route::resource('/roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
     });
