@@ -87,29 +87,29 @@ class userManagementController extends Controller
 
     }
 
-    public function delete(Department $department)
+    public function delete(User $user)
     {
         DB::beginTransaction();
         try {
 
-            DB::table('employees')->where('department_id', $department->id)
+            DB::table('users')->where('department_id', $user->id)
                 ->update(['department_id' => null]);
 
-            DB::table('users')->where('department_id', $department->id)
+            DB::table('users')->where('department_id', $user->id)
                 ->update(['department_id' => null]);
 
-            $department->delete();
+            $user->delete();
 
             DB::commit();
 
-            return $this->successResponse("Department: {$department->name} successfully deleted");
+            return $this->successResponse("User: {$user->name} successfully deleted");
 
         } catch (\Exception $e){
             DB::rollBack();
 
-            $this->logCompanyServiceInfo(':: DEPARTMENT DELETE ERROR ::', "{$e->getMessage()} :: {$e->getCode()}");
+            $this->logCompanyServiceInfo(':: USER DELETE ERROR ::', "{$e->getMessage()} :: {$e->getCode()}");
 
-            return $this->failureResponse('Department could not be deleted. Kindly try again');
+            return $this->failureResponse('User could not be deleted. Kindly try again');
         }
 
     }

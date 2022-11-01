@@ -61,5 +61,6 @@ Route::prefix('users')->group(function () {
         Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
         Route::resource('/roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
+        Route::post('{user}/delete', [userManagementController::class, 'delete'])->name('userManagement.delete');
     });
 });
