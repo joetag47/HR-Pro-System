@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Company\DepartmentController;
 use App\Http\Controllers\Company\EmployeeController;
+use App\Http\Controllers\rolesAndPermissionsController;
 use App\Http\Controllers\userManagementController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -56,11 +57,20 @@ Route::prefix('company/profile')->group(function () {
 Route::prefix('users')->group(function () {
 
     #=================================== USER MANAGEMENT ROUTES =============================================#
-    Route::prefix('roles-and-permissions')->group(function () {
+    Route::prefix('view-users')->group(function () {
         Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
         Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
         Route::resource('/roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
         Route::post('{user}/delete', [userManagementController::class, 'delete'])->name('userManagement.delete');
+    });
+
+    #=================================== ROLE MANAGEMENT ROUTES =============================================#
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [rolesAndPermissionsController::class, 'index'])->name('rolesandpermissions.roleindex');
+//        Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
+//        Route::resource('/roles', RoleController::class);
+//        Route::resource('permissions', PermissionController::class);
+//        Route::post('{user}/delete', [userManagementController::class, 'delete'])->name('userManagement.delete');
     });
 });

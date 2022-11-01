@@ -7,7 +7,6 @@
         <div class="list-item hoverable shadow mb-10 p-5">
             <div class="d-flex align-items-center">
                 <div class="d-flex flex-column flex-grow-1 mr-2">
-{{--                    <span class="text-dark-75 font-size-h6 mb-0">{{ $user_count }}</span>--}}
                     <a href="{{ route('userManagement.index') }}" class="text-dark-75 font-size-h6 mb-0">Users</a>
                 </div>
                 <div class="symbol symbol-40 symbol-light mr-4">
