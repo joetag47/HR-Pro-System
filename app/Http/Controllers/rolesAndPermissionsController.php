@@ -24,8 +24,14 @@ class rolesAndPermissionsController extends Controller
 
     public function create()
     {
-//        $roles = Permission::all();
-//        return view('rolesandpermissions.roleindex', compact('permissions'));
+        $permissions = Permission::all();
+        return view('rolesandpermissions.roleindex', compact('permissions'));
+    }
+
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        Role::create(['name' =>$request->name]);
+        return back();
     }
 
 }

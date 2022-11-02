@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
-class DepartmentController extends Controller
+class
+DepartmentController extends Controller
 {
 
     use CompanyServices;

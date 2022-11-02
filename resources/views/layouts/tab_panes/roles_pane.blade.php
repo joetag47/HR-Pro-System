@@ -39,7 +39,7 @@
         <div class="list-item hoverable shadow mb-10 p-5">
             <div class="d-flex align-items-center">
                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                    <a href="{{ route('userManagement.index') }}" class="text-dark-75 font-size-h6 mb-0">Permissions</a>
+                    <a href="{{ route('rolesandpermissions.create') }}" class="text-dark-75 font-size-h6 mb-0">Permissions</a>
                 </div>
                 <div class="symbol symbol-40 symbol-light mr-4">
 						<span class="symbol-label bg-primary">

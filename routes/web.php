@@ -60,14 +60,16 @@ Route::prefix('users')->group(function () {
     Route::prefix('view-users')->group(function () {
         Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
         Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
-        Route::resource('/roles', RoleController::class);
-        Route::resource('permissions', PermissionController::class);
+//        Route::resource('/roles', RoleController::class);
+//        Route::resource('permissions', PermissionController::class);
         Route::post('{user}/delete', [userManagementController::class, 'delete'])->name('userManagement.delete');
     });
 
     #=================================== ROLE MANAGEMENT ROUTES =============================================#
     Route::prefix('roles')->group(function () {
         Route::get('/', [rolesAndPermissionsController::class, 'index'])->name('rolesandpermissions.roleindex');
+        Route::get('create', [rolesAndPermissionsController::class, 'create'])->name('rolesandpermissions.create');
+        Route::get('store', [rolesAndPermissionsController::class, 'store'])->name('rolesandpermissions.store');
 //        Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
 //        Route::resource('/roles', RoleController::class);
 //        Route::resource('permissions', PermissionController::class);
