@@ -1,31 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers;
 
 use App\DataTables\Company\DepartmentDataTable;
-use App\Http\Controllers\Controller;
+use App\DataTables\userManagement\UsersDataTable;
 use App\Models\Company\Department;
-use App\Traits\CompanyServices;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
-class
-DepartmentController extends Controller
+class userManagementController extends Controller
 {
+//    public function index(){
+//        return view('userManagement.index');
+//    }
 
-    use CompanyServices;
-
-    public function __construct()
+    public function index(UsersDataTable $dataTable)
     {
-        $this->middleware('auth');
-    }
-
-
-    public function index(DepartmentDataTable $dataTable)
-    {
-        return $dataTable->render('company.departments.index');
+        return $dataTable->render('userManagement.index');
     }
 
     public function store(Request $request)
@@ -39,11 +32,11 @@ DepartmentController extends Controller
 
         DB::beginTransaction();
 
-        $check_dept = Department::query()->where('name', $data['name'])
+        $check_users = User::query()->where('email', $data['email'])
             ->where('company_id', auth()->user()->company->id)->first();
 
-        if (!empty($check_dept))
-            return $this->failureResponse("Department with name: {$check_dept->name} already exists");
+        if (!empty($check_users))
+            return $this->failureResponse("Email: {$check_users->email} already exists");
 
         try {
 
@@ -94,29 +87,29 @@ DepartmentController extends Controller
 
     }
 
-    public function delete(Department $department)
+    public function delete(User $user)
     {
         DB::beginTransaction();
         try {
 
-            DB::table('employees')->where('department_id', $department->id)
+            DB::table('users')->where('department_id', $user->id)
                 ->update(['department_id' => null]);
 
-            DB::table('users')->where('department_id', $department->id)
+            DB::table('users')->where('department_id', $user->id)
                 ->update(['department_id' => null]);
 
-            $department->delete();
+            $user->delete();
 
             DB::commit();
 
-            return $this->successResponse("Department: {$department->name} successfully deleted");
+            return $this->successResponse("User: {$user->name} successfully deleted");
 
         } catch (\Exception $e){
             DB::rollBack();
 
-            $this->logCompanyServiceInfo(':: DEPARTMENT DELETE ERROR ::', "{$e->getMessage()} :: {$e->getCode()}");
+            $this->logCompanyServiceInfo(':: USER DELETE ERROR ::', "{$e->getMessage()} :: {$e->getCode()}");
 
-            return $this->failureResponse('Department could not be deleted. Kindly try again');
+            return $this->failureResponse('User could not be deleted. Kindly try again');
         }
 
     }
