@@ -52,6 +52,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +60,7 @@
                                     <tr>
                                         <td>{{ $loop->index+1 }}</td>
                                         <td>{{ $role->name }}</td>
+                                        <td></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -69,7 +71,7 @@
             </div>
         </div>
         <!-- Modal-->
-        <div class="modal fade" id="departmentAddModal" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -86,11 +88,6 @@
                                 <label>Role Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="name">
                             </div>
-{{--                            <div class="form-group">--}}
-{{--                                <label>Description </label>--}}
-{{--                                <textarea class="form-control" name="description"></textarea>--}}
-{{--                            </div>--}}
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
