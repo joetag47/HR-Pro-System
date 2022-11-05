@@ -69,7 +69,7 @@ Route::prefix('users')->group(function () {
     Route::prefix('roles')->group(function () {
         Route::get('/', [rolesAndPermissionsController::class, 'index'])->name('rolesandpermissions.roleindex');
         Route::get('create', [rolesAndPermissionsController::class, 'create'])->name('rolesandpermissions.create');
-        Route::get('store', [rolesAndPermissionsController::class, 'store'])->name('rolesandpermissions.store');
+        Route::post('store', [rolesAndPermissionsController::class, 'store'])->name('rolesandpermissions.store');
 //        Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
 //        Route::resource('/roles', RoleController::class);
 //        Route::resource('permissions', PermissionController::class);

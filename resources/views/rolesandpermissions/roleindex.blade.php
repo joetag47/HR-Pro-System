@@ -28,7 +28,7 @@
                     <!--begin::Toolbar-->
                     <div class="d-flex align-items-center flex-wrap">
                         <!--begin::Button-->
-                        <a href="#" class="btn btn-primary btn-shadow" data-toggle="modal" data-target="#departmentAddModal">
+                        <a href="{{ route("rolesandpermissions.create") }}" class="btn btn-primary btn-shadow" data-toggle="" data-target="#">
                             <i class="flaticon-plus"></i> Add Role
                         </a>
                     </div>
@@ -80,20 +80,20 @@
                             <i aria-hidden="true" class="ki ki-close"></i>
                         </button>
                     </div>
-                    <form class="addItem" action="{{ route('rolesandpermissions.store') }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Role Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="name">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary font-weight-bold" value="Save Role">
-                        </div>
-                    </form>
+{{--                    <form class="addItem" action="{{ route('rolesandpermissions.store') }}" method="POST">--}}
+{{--                        @csrf--}}
+{{--                        @method('POST')--}}
+{{--                        <div class="modal-body">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>Role Name <span class="text-danger">*</span></label>--}}
+{{--                                <input type="text" class="form-control" name="name">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>--}}
+{{--                            <input type="submit" class="btn btn-primary font-weight-bold" value="Save Role">--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
                 </div>
             </div>
         </div>

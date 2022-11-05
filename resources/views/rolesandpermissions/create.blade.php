@@ -37,32 +37,18 @@
             <div class="container">
                 <div class="card card-custom gutter-b example example-compact shadow-lg">
                     <div class="card-header">
-                        <h3 class="card-title">All Roles</h3>
-                        <div>
-                            <a href="" class="btn btn-outline-primary btn-sm mt-4">View All Roles</a>
-                        </div>
+                        <h3 class="card-title">Create Role</h3>
                     </div>
                     <div class="card-body">
-                        {{--                        <div class="table-responsive">--}}
-                        {{--                            {!! $dataTable->table(['class' => 'table table-hover']) !!}--}}
-                        {{--                        </div>--}}
                         <div class="data-tables">
-                            <table id="dataTable" class="text-center">
-                                <thead class="bg-light text-capitali">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-{{--                                @foreach ($roles as $role)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{ $loop->index+1 }}</td>--}}
-{{--                                        <td>{{ $role->name }}</td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-                                </tbody>
-                            </table>
+                            <form action="{{ route("rolesandpermissions.store") }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Role Name</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Please Enter Role Name">
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-4 pr-1 pl-4">Save Role</button>
+                            </form>
                         </div>
                     </div>
                 </div>
