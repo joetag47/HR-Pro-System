@@ -37,69 +37,37 @@
             <div class="container">
                 <div class="card card-custom gutter-b example example-compact shadow-lg">
                     <div class="card-header">
-                        <h3 class="card-title">All Roles</h3>
-                        <div>
-                            <a href="" class="btn btn-outline-primary btn-sm mt-4">View All Roles</a>
-                        </div>
+                        <h3 class="card-title">Create Role</h3>
                     </div>
                     <div class="card-body">
-                        {{--                        <div class="table-responsive">--}}
-                        {{--                            {!! $dataTable->table(['class' => 'table table-hover']) !!}--}}
-                        {{--                        </div>--}}
                         <div class="data-tables">
-                            <table id="dataTable" class="text-center">
-                                <thead class="bg-light text-capitali">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-{{--                                @foreach ($roles as $role)--}}
-{{--                                    <tr>--}}
-{{--                                        <td>{{ $loop->index+1 }}</td>--}}
-{{--                                        <td>{{ $role->name }}</td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal-->
-        <div class="modal fade" id="departmentAddModal" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Department</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i aria-hidden="true" class="ki ki-close"></i>
-                        </button>
-                    </div>
-                    <form class="addItem" action="{{ route('company.department.store') }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="name">
-                            </div>
-                            <div class="form-group">
-                                <label>Description </label>
-                                <textarea class="form-control" name="description"></textarea>
-                            </div>
+                            <form action="{{ route("rolesandpermissions.store") }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Role Name</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Please Enter Role Name">
+                                </div>
 
+                                {{--List of permissions--}}
+                                <div class="form-group">
+                                    <label for="permissions">Permissions</label>
+
+                                    @foreach ($permissions as $permission)
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
+                                            <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mt-4 pr-1 pl-4">Save Role</button>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary font-weight-bold">Save Department</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="modal fade" id="departmentEditModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
