@@ -24,13 +24,20 @@ class rolesAndPermissionsController extends Controller
 
     public function create()
     {
-        $create_role = Permission::all();
-        return view('rolesandpermissions.create', compact('create_role'));
+        $permissions = Permission::all();
+        return view('rolesandpermissions.create', compact('permissions'));
     }
 
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        Role::create(['name' =>$request->name]);
+        $role = Role::create(['name' =>$request->name]);
+//        $role = DB::table('roles')->where('name', $request->name)->first();
+
+        $permissions = $request->input('permissions');
+
+        if(!empty($permissions)){
+            $role->syncPermissions($permissions);
+        }
         return back();
     }
 
