@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BusinessTypesSeeder::class,
             CompanySeeder::class,
-//            UserSeeder::class,
             RoleSeeder::class,
             AdminSeeder::class,
+            UserSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

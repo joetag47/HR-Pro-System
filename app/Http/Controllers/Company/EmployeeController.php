@@ -105,6 +105,23 @@ class EmployeeController extends Controller
 
             }
 
+            $dependants_collection = collect();
+
+            if (!empty($data['dependants_list']) && !empty((array)$data['dependants_list'][0])){
+
+                foreach (json_decode($data['dependants_list'][0], true) as $dependant) {
+
+                    if (!empty($dependant['dependant_name']) && !empty($dependant['dependant_age'])) {
+                        $dependants_collection->push($this->dumpDependants((array)$dependant, $employee->id));
+                    }
+                }
+
+                if (!empty($dependants_collection))
+                    DB::table('employee_dependants')->insert($dependants_collection->toArray());
+
+            }
+
+
 
             DB::commit();
 
@@ -126,6 +143,7 @@ class EmployeeController extends Controller
 
     public function details(Employee $employee)
     {
+
         return view('company.employees.details', compact('employee'));
     }
 
@@ -136,6 +154,8 @@ class EmployeeController extends Controller
         $history_collection = collect();
 
         $children_collection = collect();
+
+        $dependant_collection = collect();
 
         if (!empty($employee->getChildren)){
             foreach ($employee->getChildren as $child){
@@ -159,7 +179,16 @@ class EmployeeController extends Controller
             }
         }
 
-        return view('company.employees.edit', compact('employee', 'children_collection', 'departments', 'history_collection'));
+        if (!empty($employee->getDependants)){
+            foreach ($employee->getDependants as $dependant) {
+                $dependant_collection->push([
+                    'dependant_name' => $dependant->name,
+                    'dependant_age' => $dependant->age
+                ]);
+            }
+        }
+
+        return view('company.employees.edit', compact('employee', 'children_collection', 'departments', 'history_collection', 'dependant_collection'));
     }
 
     public function update(Request $request, Employee $employee)
@@ -240,6 +269,26 @@ class EmployeeController extends Controller
 
             }
 
+            DB::table('employee_dependants')->where('employee_id', $employee->id)->delete();
+
+            $dependant_collection = collect();
+
+            $dependants_collection = collect();
+
+            if (!empty($data['dependants_list']) && !empty((array)$data['dependants_list'][0])){
+
+                foreach (json_decode($data['dependants_list'][0], true) as $dependant) {
+
+                    if (!empty($dependant['dependant_name']) && !empty($dependant['dependant_age'])) {
+                        $dependants_collection->push($this->dumpDependants((array)$dependant, $employee->id));
+                    }
+                }
+
+                if (!empty($dependants_collection))
+                    DB::table('employee_dependants')->insert($dependants_collection->toArray());
+
+            }
+
 
             DB::commit();
 
@@ -267,6 +316,8 @@ class EmployeeController extends Controller
     {
         DB::beginTransaction();
         try {
+
+            DB::table('employee_childrens')->where('employee_id', $employee->id)->delete();
 
             DB::table('employee_education')->where('employee_id', $employee->id)->delete();
 
@@ -330,6 +381,15 @@ class EmployeeController extends Controller
             'name' => $data['child_name'] ?? null,
             'dob' => $data['child_dob'] ?? null,
             'gender' => $data['child_gender'] ?? null,
+        ];
+    }
+
+    public function dumpDependants($data, $employee)
+    {
+        return [
+            'employee_id' => $employee,
+            'name' => $data['dependant_name'] ?? null,
+            'age' => $data['dependant_age'] ?? null,
         ];
     }
 

@@ -28,6 +28,6 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'company_id' => 1
-        ]);
+        ])->assignRole('admin', 'business');;
     }
 }
