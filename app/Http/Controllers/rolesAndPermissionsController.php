@@ -25,11 +25,20 @@ class rolesAndPermissionsController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('rolesandpermissions.create', compact('permissions'));
+        $permission_groups = User::getpermissionGroups();
+        return view('rolesandpermissions.create', compact('permissions', 'permission_groups'));
     }
 
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
+//        Validating User Input
+        $request->validate([
+           'name'=>'required|max:100|unique:roles'
+            ],[
+                'name.required'=>'Please enter a role name'
+        ]);
+
+//        Process User Input
         $role = Role::create(['name' =>$request->name]);
 //        $role = DB::table('roles')->where('name', $request->name)->first();
 

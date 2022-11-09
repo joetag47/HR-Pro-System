@@ -40,6 +40,7 @@
                         <h3 class="card-title">Create Role</h3>
                     </div>
                     <div class="card-body">
+                        @include('layouts.partials.messages')
                         <div class="data-tables">
                             <form action="{{ route("rolesandpermissions.store") }}" method="POST">
                                 @csrf
@@ -52,50 +53,35 @@
                                 <div class="form-group">
                                     <label for="permissions">Permissions</label>
 
-                                    @foreach ($permissions as $permission)
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
-                                            <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="checkPermissionAll" value="1">
+                                        <label class="form-check-label" for="checkPermissionAll">All</label>
+                                    </div>
+                                    <hr>
+
+                                    @foreach ($permission_groups as $group)
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission" value="{{ $group->name }}">
+                                                    <label class="form-check-label" for="checkPermission">{{ $group->name }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="clo-9">
+                                                @foreach ($permissions as $permission)
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" name="permissions[]" id="checkPermission{{ $permission->id }}" value="{{ $permission->name }}">
+                                                        <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
-
                                 <button type="submit" class="btn btn-primary mt-4 pr-1 pl-4">Save Role</button>
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="departmentEditModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Update Department</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i aria-hidden="true" class="ki ki-close"></i>
-                        </button>
-                    </div>
-                    <form class="addItem" id="editDepartmentForm" action="" method="POST">
-                        @csrf
-                        @method('POST')
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="name" id="editName">
-                            </div>
-                            <div class="form-group">
-                                <label>Description </label>
-                                <textarea class="form-control" name="description" id="editDescription"></textarea>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary font-weight-bold">Update Department</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -120,5 +106,17 @@
                         responsive:true
                     });
                 }
+            </script>
+
+            <script>
+                $("#checkPermissionAll").click(function(){
+                    if($(this).is(':checked')){
+                    //    Check all the checkboxes
+                        $('input[type=checkbox]').prop('checked', true);
+                    }else {
+                    //    uncheck all the checkboxes
+                        $('input[type=checkbox]').prop('checked', false);
+                    }
+                })
             </script>
     @endpush
