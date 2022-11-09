@@ -175,7 +175,7 @@
                                                 <div class="card">
                                                     <div class="card-header" id="headingOne6">
                                                         <div class="card-title" data-toggle="collapse" data-target="#collapse{{ $children_count }}">
-                                                            <i class="flaticon-pie-chart-1"></i>Experience #{{ $children_count }}</div>
+                                                            <i class="flaticon-user"></i>Child #{{ $children_count }}</div>
                                                     </div>
                                                     <div id="collapse{{ $children_count }}" class="collapse {{ $children_count === 1 ? 'show' : null }}" data-parent="#childrenAccordion">
                                                         <div class="card-body">
@@ -192,6 +192,33 @@
                                             @endforeach
                                         </div>
                                     @endif
+
+                                    @if(!empty($employee->getDependants))
+                                        @php $dependant_count = 0; @endphp
+                                            <!--begin::Accordion-->
+                                        <div class="accordion accordion-solid accordion-toggle-plus" id="dependantsAccordion">
+                                            @foreach($employee->getDependants as $dependant)
+                                                @php $dependant_count++ @endphp
+                                                <div class="card">
+                                                    <div class="card-header" id="headingOne6">
+                                                        <div class="card-title" data-toggle="collapse" data-target="#collapse{{ $dependant_count }}">
+                                                            <i class="flaticon-user"></i>Dependant #{{ $dependant_count }}</div>
+                                                    </div>
+                                                    <div id="collapse{{ $dependant_count }}" class="collapse {{ $dependant_count === 1 ? 'show' : null }}" data-parent="#dependantsAccordion">
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table col-md-7 table-bordered">
+                                                                    <tr><td style="width: 200px; font-weight: bold;">Name</td><td>{{ $dependant->name }}</td></tr>
+                                                                    <tr><td style="width: 200px; font-weight: bold;">Age</td><td>{{ $dependant->age }}</td></tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+
 
                                 </div>
                             </div>

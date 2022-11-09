@@ -363,6 +363,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <h4 class="mb-10 font-weight-bold text-dark">Dependants</h4><br>
+                                                <textarea class="row" id="dependants_list" name="dependants_list[]"></textarea>
+
+
                                                 <h4 class="mb-10 font-weight-bold text-dark">Children</h4><br>
                                                 <textarea class="row" id="children_list" name="children_list[]"></textarea>
                                                 <!--end::Select-->
@@ -510,6 +514,31 @@
             <script src="{{ asset('custom_scripts/js/employee_form.js') }}"></script>
             <script src="{{ asset('custom_scripts/js/jq.multiinput.min.js') }}"></script>
             <script>
+                $('#dependants_list').multiInput({
+                    json: true,
+                    input: $(`<div class="row"><div class="col-xl-6">
+                        <div class="form-group fv-plugins-icon-container">
+                    <label>Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-solid form-control-lg" name="dependant_name">
+                </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group fv-plugins-icon-container">
+                        <label>Age <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control form-control-solid form-control-lg" name="dependant_age">
+                    </div>
+                </div>
+                </div>`),
+                    addButtonHtml:'<a class="add" style="margin-top: 10px;margin-right: -10%; cursor: pointer;"><i class="fa fa-lg fa-plus-circle"></i><span class="sr-only">' +  +'</span></a>',
+                    removeButtonHtml:'<a class="remove" style="margin-top: 10px; margin-right: -10%; cursor: pointer;"><i class="fa fa-lg fa-minus-circle"></i><span class="sr-only">' +  +'</span></a>',
+                    limit: 10,
+                    onElementAdd: function (el, plugin) {
+                        // console.log(plugin.elementCount);
+                    },
+                    onElementRemove: function (el, plugin) {
+                        // console.log(plugin.elementCount);
+                    }
+                })
                 $('#children_list').multiInput({
                     json: true,
                     input: $(`<div class="row"><div class="col-xl-4">

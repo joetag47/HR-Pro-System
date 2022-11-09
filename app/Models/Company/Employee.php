@@ -3,6 +3,7 @@
 namespace App\Models\Company;
 
 use App\Models\EmployeeChildren;
+use App\Models\EmployeeDependant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,10 @@ class Employee extends Model
     public function getChildren()
     {
         return $this->hasMany(EmployeeChildren::class, 'employee_id');
+    }
+
+    public function getDependants()
+    {
+        return $this->hasMany(EmployeeDependant::class, 'employee_id');
     }
 }

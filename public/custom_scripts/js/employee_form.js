@@ -97,208 +97,208 @@ var _initValidation = function () {
 // Step 1
 _validations.push(FormValidation.formValidation(
 _formEl,
-// {
-//     fields: {
-//         full_name: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Full Name field is required'
-//                 }
-//             }
-//         },
-//         email: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Email field is required'
-//                 },
-//                 emailAddress: {
-//                     message: 'Kindly provide a valid email address'
-//                 }
-//             }
-//         },
-//         date_of_birth: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Date of Birth is required'
-//                 }
-//             }
-//         },
-//         place_of_birth: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Place of Birth is required'
-//                 }
-//             }
-//         },
-//         gender: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Gender field is required'
-//                 },
-//             }
-//         }
-//     },
-//     plugins: {
-//         trigger: new FormValidation.plugins.Trigger(),
-//         // Bootstrap Framework Integration
-//         bootstrap: new FormValidation.plugins.Bootstrap({
-//             //eleInvalidClass: '',
-//             eleValidClass: '',
-//         })
-//     }
-// }
+{
+    fields: {
+        full_name: {
+            validators: {
+                notEmpty: {
+                    message: 'Full Name field is required'
+                }
+            }
+        },
+        email: {
+            validators: {
+                notEmpty: {
+                    message: 'Email field is required'
+                },
+                emailAddress: {
+                    message: 'Kindly provide a valid email address'
+                }
+            }
+        },
+        date_of_birth: {
+            validators: {
+                notEmpty: {
+                    message: 'Date of Birth is required'
+                }
+            }
+        },
+        place_of_birth: {
+            validators: {
+                notEmpty: {
+                    message: 'Place of Birth is required'
+                }
+            }
+        },
+        gender: {
+            validators: {
+                notEmpty: {
+                    message: 'Gender field is required'
+                },
+            }
+        }
+    },
+    plugins: {
+        trigger: new FormValidation.plugins.Trigger(),
+        // Bootstrap Framework Integration
+        bootstrap: new FormValidation.plugins.Bootstrap({
+            //eleInvalidClass: '',
+            eleValidClass: '',
+        })
+    }
+}
 ));
 
 // Step 2
 _validations.push(FormValidation.formValidation(
 _formEl,
-// {
-//     fields: {
-//         residential_address: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Residential Address is required'
-//                 }
-//             }
-//         },
-//         phone_number: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Phone Number is required'
-//                 }
-//             }
-//         },
-//         identity_type: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Identity Type is required'
-//                 }
-//             }
-//         },
-//         id_file: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'ID File field is required'
-//                 }
-//             }
-//         }
-//     },
-//     plugins: {
-//         trigger: new FormValidation.plugins.Trigger(),
-//         // Bootstrap Framework Integration
-//         bootstrap: new FormValidation.plugins.Bootstrap({
-//             //eleInvalidClass: '',
-//             eleValidClass: '',
-//         })
-//     }
-// }
+{
+    fields: {
+        residential_address: {
+            validators: {
+                notEmpty: {
+                    message: 'Residential Address is required'
+                }
+            }
+        },
+        phone_number: {
+            validators: {
+                notEmpty: {
+                    message: 'Phone Number is required'
+                }
+            }
+        },
+        identity_type: {
+            validators: {
+                notEmpty: {
+                    message: 'Identity Type is required'
+                }
+            }
+        },
+        id_file: {
+            validators: {
+                notEmpty: {
+                    message: 'ID File field is required'
+                }
+            }
+        }
+    },
+    plugins: {
+        trigger: new FormValidation.plugins.Trigger(),
+        // Bootstrap Framework Integration
+        bootstrap: new FormValidation.plugins.Bootstrap({
+            //eleInvalidClass: '',
+            eleValidClass: '',
+        })
+    }
+}
 ));
 
 // Step 3
 _validations.push(FormValidation.formValidation(
 _formEl,
-// {
-//     fields: {
-//         fathers_name: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Father\'s name is required'
-//                 }
-//             }
-//         },
-//         mothers_name: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Mother\'s name is required'
-//                 }
-//             }
-//         },
-//         marital_status: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Marital Status is required'
-//                 }
-//             }
-//         }
-//     },
-//     plugins: {
-//         trigger: new FormValidation.plugins.Trigger(),
-//         // Bootstrap Framework Integration
-//         bootstrap: new FormValidation.plugins.Bootstrap({
-//             //eleInvalidClass: '',
-//             eleValidClass: '',
-//         })
-//     }
-// }
+{
+    fields: {
+        fathers_name: {
+            validators: {
+                notEmpty: {
+                    message: 'Father\'s name is required'
+                }
+            }
+        },
+        mothers_name: {
+            validators: {
+                notEmpty: {
+                    message: 'Mother\'s name is required'
+                }
+            }
+        },
+        marital_status: {
+            validators: {
+                notEmpty: {
+                    message: 'Marital Status is required'
+                }
+            }
+        }
+    },
+    plugins: {
+        trigger: new FormValidation.plugins.Trigger(),
+        // Bootstrap Framework Integration
+        bootstrap: new FormValidation.plugins.Bootstrap({
+            //eleInvalidClass: '',
+            eleValidClass: '',
+        })
+    }
+}
 ));
 
 // Step 4
 _validations.push(FormValidation.formValidation(
 _formEl,
-// {
-//     fields: {
-//         date_employed: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Date Employed field is required'
-//                 }
-//             }
-//         },
-//         department: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Department field is required'
-//                 }
-//             }
-//         },
-//         position: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Position field is required'
-//                 }
-//             }
-//         },
-//         job_description: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Job Description field is required'
-//                 }
-//             }
-//         },
-//     },
-//     plugins: {
-//         trigger: new FormValidation.plugins.Trigger(),
-//         // Bootstrap Framework Integration
-//         bootstrap: new FormValidation.plugins.Bootstrap({
-//             //eleInvalidClass: '',
-//             eleValidClass: '',
-//         })
-//     }
-// }
+{
+    fields: {
+        date_employed: {
+            validators: {
+                notEmpty: {
+                    message: 'Date Employed field is required'
+                }
+            }
+        },
+        department: {
+            validators: {
+                notEmpty: {
+                    message: 'Department field is required'
+                }
+            }
+        },
+        position: {
+            validators: {
+                notEmpty: {
+                    message: 'Position field is required'
+                }
+            }
+        },
+        job_description: {
+            validators: {
+                notEmpty: {
+                    message: 'Job Description field is required'
+                }
+            }
+        },
+    },
+    plugins: {
+        trigger: new FormValidation.plugins.Trigger(),
+        // Bootstrap Framework Integration
+        bootstrap: new FormValidation.plugins.Bootstrap({
+            //eleInvalidClass: '',
+            eleValidClass: '',
+        })
+    }
+}
 ));
 
 // Step 5
 _validations.push(FormValidation.formValidation(
 _formEl,
-// {
-//     fields: {
-//         work_experience: {
-//             validators: {
-//                 notEmpty: {
-//                     message: 'Work Experience field is required'
-//                 }
-//             }
-//         },
-//     },
-//     plugins: {
-//         trigger: new FormValidation.plugins.Trigger(),
-//         // Bootstrap Framework Integration
-//         bootstrap: new FormValidation.plugins.Bootstrap({
-//             //eleInvalidClass: '',
-//             eleValidClass: '',
-//         })
-//     }
-// }
+{
+    fields: {
+        work_experience: {
+            validators: {
+                notEmpty: {
+                    message: 'Work Experience field is required'
+                }
+            }
+        },
+    },
+    plugins: {
+        trigger: new FormValidation.plugins.Trigger(),
+        // Bootstrap Framework Integration
+        bootstrap: new FormValidation.plugins.Bootstrap({
+            //eleInvalidClass: '',
+            eleValidClass: '',
+        })
+    }
+}
 ));
 }
 
