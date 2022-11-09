@@ -26,12 +26,12 @@
                     </div>
                     <!--end::Info-->
                     <!--begin::Toolbar-->
-                    <div class="d-flex align-items-center flex-wrap">
-                        <!--begin::Button-->
-                        <a href="#" class="btn btn-primary btn-shadow" data-toggle="modal" data-target="#departmentAddModal">
-                            <i class="flaticon-plus"></i> Add Role
-                        </a>
-                    </div>
+{{--                    <div class="d-flex align-items-center flex-wrap">--}}
+{{--                        <!--begin::Button-->--}}
+{{--                        <a href="#" class="btn btn-primary btn-shadow" data-toggle="modal" data-target="#departmentAddModal">--}}
+{{--                            <i class="flaticon-plus"></i> Add Role--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <div class="container">
@@ -58,7 +58,6 @@
                                         <label class="form-check-label" for="checkPermissionAll">All</label>
                                     </div>
                                     <hr>
-
                                     @foreach ($permission_groups as $group)
                                         <div class="row">
                                             <div class="col-3">
@@ -74,6 +73,7 @@
                                                         <label class="form-check-label" for="checkPermission{{ $permission->id }}">{{ $permission->name }}</label>
                                                     </div>
                                                 @endforeach
+                                                <br >
                                             </div>
                                         </div>
                                     @endforeach
