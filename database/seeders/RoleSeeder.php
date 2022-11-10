@@ -21,37 +21,89 @@ class  RoleSeeder extends Seeder
         $roleUser = Role::create(['name' => 'user']);
 
         $permissions = [
-//          Create superadmin
-            'superadmin.create',
-            'superadmin.view',
-            'superadmin.delete',
-            'superadmin.edit',
 
-//          Create admin
-            'admin.create',
-            'admin.view',
-            'admin.delete',
-            'admin.edit',
+            [
+                'group_name' => 'superadmin',
+                'permissions' => [
+//                    Create superadmin
+                    'superadmin.create',
+                    'superadmin.view',
+                    'superadmin.delete',
+                    'superadmin.edit',
+                ]
+            ],
 
-//          Create business
-            'business.create',
-            'business.view',
-            'business.delete',
-            'business.edit',
+            [
+                'group_name' => 'admin',
+                'permissions' => [
+//                    Create admin
+                    'admin.create',
+                    'admin.view',
+                    'admin.delete',
+                    'admin.edit',
+                ]
+            ],
 
-//            Create user
-            'user.create',
-            'user.view',
-            'user.delete',
-            'user.edit'
+            [
+                'group_name' => 'business',
+                'permissions' => [
+                    'business.create',
+                    'business.view',
+                    'business.delete',
+                    'business.edit',
+                ]
+            ],
+
+            [
+                'group_name' => 'user',
+                'permissions' => [
+                    'user.create',
+                    'user.view',
+                    'user.delete',
+                    'user.edit',
+                ]
+            ],
+
+            [
+                'group_name' => 'employee',
+                'permissions' => [
+                    'employee.create',
+                    'employee.view',
+                    'employee.delete',
+                    'employee.edit',
+                ]
+            ],
+
+            [
+                'group_name' => 'department',
+                'permissions' => [
+                    'department.create',
+                    'department.view',
+                    'department.delete',
+                    'department.edit',
+                ]
+            ],
+
+            [
+                'group_name' => 'company',
+                'permissions' => [
+                    'company.create',
+                    'company.view',
+                    'company.delete',
+                    'company.edit',
+                ]
+            ],
         ];
 
 #=================================== CREATE AND ASSIGN PERMISSIONS =============================================#
         for ($i = 0; $i < count($permissions); $i++){
-//            Create permission
-            $permission = Permission::create(['name'=>$permissions[$i]]);
-            $roleSuperAdmin->givePermissionTo($permission);
-            $permission->assignRole($roleAdmin);
+            $permissionGroup = $permissions[$i]['group_name'];
+            for ($j = 0; $j < count($permissions[$i]['permissions']); $j++){
+//                Create permission
+                $permission = Permission::create(['name'=>$permissions[$i]['permissions'][$j], 'group_name' => $permissionGroup]);
+                $roleSuperAdmin->givePermissionTo($permission);
+                $permission->assignRole($roleAdmin);
+            }
         }
     }
 }
