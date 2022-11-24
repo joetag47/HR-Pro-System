@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class EmployeeDataTable extends DataTable
+class CompanyEmployeeDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -61,10 +61,10 @@ class EmployeeDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('dataTable')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax(route('company.getEmployees'))
-                    ->dom('Bfrtip');
+            ->setTableId('dataTable')
+            ->columns($this->getColumns())
+            ->minifiedAjax(route('company.getEmployees'))
+            ->dom('Bfrtip');
     }
 
     /**
@@ -80,11 +80,11 @@ class EmployeeDataTable extends DataTable
             Column::make('department_id')->title('Department'),
             Column::make('position'),
             Column::make('created_at')->title('Date Created'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+//            Column::computed('action')
+//                ->exportable(false)
+//                ->printable(false)
+//                ->width(60)
+//                ->addClass('text-center'),
         ];
     }
 

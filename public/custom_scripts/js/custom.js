@@ -160,4 +160,50 @@ $(document).ready(function () {
     });
 
 
+    // =================================================== COMPANY SECTION =======================================================
+
+    $('.updateCompany').submit(function (e) {
+        e.preventDefault();
+        Notiflix.Block.pulse('#pageSection');
+
+        url = $(this).attr('action')
+
+        $.ajax({
+            url: url,
+            data: new FormData(this),
+            method: 'POST',
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: ((response) => {
+
+                $('#companyLogo').attr('src', response.msg.logo)
+
+                $('#companyName').html(response.msg.company.name)
+
+                $('#companyEmail').html(response.msg.company.email)
+
+                $('#companyPhone').html(response.msg.company.phone)
+
+                $('#companyAddress').html(response.msg.company.address)
+
+                $('#companyDescription').html(response.msg.company.description)
+
+                pushToastMessage('Company successfully updated', 200)
+
+                Notiflix.Block.remove('#pageSection');
+            }),
+            error: ((response) => {
+
+                console.log('error', response)
+
+                Notiflix.Block.remove('#pageSection');
+
+                pushToastMessage(JSON.parse(response.responseText).msg, 401)
+
+            })
+        })
+    })
+
 })

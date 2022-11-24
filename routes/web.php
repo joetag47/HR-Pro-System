@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Company\DepartmentController;
 use App\Http\Controllers\Company\EmployeeController;
+use App\Http\Controllers\Company\ProfileController;
 use App\Http\Controllers\rolesAndPermissionsController;
 use App\Http\Controllers\userManagementController;
 use Illuminate\Support\Facades\Auth;
@@ -25,12 +26,17 @@ Auth::routes();
 //Middleware role auth added
 Route::get('/', function () {
     return view('auth.login');
-})->middleware(['auth', 'role:admin'])->name('home');
+})->middleware(['auth']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 
 Route::prefix('company/profile')->group(function () {
+
+    Route::get('/', [ProfileController::class, 'index'])->name('company.profile.index');
+    Route::post('update', [ProfileController::class, 'updateCompany'])->name('company.profile.update');
+    Route::get('employees/datatable', [ProfileController::class, 'getEmployees'])->name('company.getEmployees');
+    Route::get('departments/datatable', [ProfileController::class, 'getDepartments'])->name('company.getDepartments');
 
     #=================================== DEPARTMENT ROUTES =============================================#
     Route::prefix('departments')->group(function () {

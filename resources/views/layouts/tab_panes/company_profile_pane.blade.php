@@ -7,6 +7,23 @@
         <div class="list-item hoverable shadow mb-10 p-5">
             <div class="d-flex align-items-center">
                 <div class="d-flex flex-column flex-grow-1 mr-2">
+                    <a href="{{ route('company.profile.index') }}" class="text-muted text-hover-primary font-weight-bold">Company Profile</a>
+                </div>
+                <div class="symbol symbol-40 symbol-light mr-4">
+						<span class="symbol-label bg-primary">
+                            <i class="fa fa-building text-white"></i>
+						</span>
+                </div>
+                <!--begin::End-->
+            </div>
+        </div>
+    </div>
+    <div class="list list-hover">
+        <!--begin::Item-->
+
+        <div class="list-item hoverable shadow mb-10 p-5">
+            <div class="d-flex align-items-center">
+                <div class="d-flex flex-column flex-grow-1 mr-2">
                     <span class="text-dark-75 font-size-h6 mb-0">{{ $department_count }}</span>
                     <a href="{{ route('company.department.index') }}" class="text-muted text-hover-primary font-weight-bold">Departments</a>
                 </div>

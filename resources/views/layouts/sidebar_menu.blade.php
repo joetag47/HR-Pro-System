@@ -5,7 +5,7 @@
 <!--begin::Header Mobile-->
 <div id="kt_header_mobile" class="header-mobile">
     <!--begin::Logo-->
-    <a href="{{ route('home') }}">
+    <a href="{{ route('dashboard') }}">
         <img alt="Logo" src="https://preview.keenthemes.com/metronic/theme/html/demo3/dist/assets/media/logos/logo-letter-2.png" class="logo-default max-h-30px" />
     </a>
     <!--end::Logo-->
@@ -28,7 +28,7 @@
                 <!--begin::Brand-->
                 <div class="aside-brand d-flex flex-column align-items-center flex-column-auto py-5 py-lg-12">
                     <!--begin::Logo-->
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('dashboard') }}">
                         <img alt="Logo" src="https://preview.keenthemes.com/metronic/theme/html/demo3/dist/assets/media/logos/logo-letter-2.png" class="max-h-30px" />
                     </a>
                     <!--end::Logo-->
@@ -293,7 +293,7 @@
                 <i class="symbol-badge bg-success"></i>
             </div>
             <div class="d-flex flex-column">
-                <a href="{{ route('home') }}" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ auth()->user()->name }}</a>
+                <a href="{{ route('dashboard') }}" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ auth()->user()->name }}</a>
                 <div class="text-muted mt-1">Application Developer</div>
                 <div class="navi mt-2">
                     <a href="#" class="navi-item">
