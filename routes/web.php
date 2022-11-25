@@ -63,13 +63,10 @@ Route::prefix('company/profile')->group(function () {
 Route::prefix('users')->group(function () {
 
     #=================================== USER MANAGEMENT ROUTES =============================================#
-    Route::prefix('view-users')->group(function () {
-        Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
-        Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
-//        Route::resource('/roles', RoleController::class);
-//        Route::resource('permissions', PermissionController::class);
-        Route::post('{user}/delete', [userManagementController::class, 'delete'])->name('userManagement.delete');
-    });
+    Route::get('/', [userManagementController::class, 'index'])->name('userManagement.index');
+    Route::post('store', [userManagementController::class, 'store'])->name('userManagement.store');
+    Route::post('{users}/fetch', [userManagementController::class, 'fetch'])->name('userManagement.fetch');
+    Route::post('{user}/delete', [userManagementController::class, 'delete'])->name('userManagement.delete');
 
     #=================================== ROLE MANAGEMENT ROUTES =============================================#
     Route::prefix('roles')->group(function () {
