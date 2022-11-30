@@ -107,7 +107,7 @@
                         <!--end::Item-->
                         <!--begin::Item-->
                         <li class="nav-item mb-3" data-toggle="tooltip" data-placement="right" data-container="body" data-boundary="window" title="User Management">
-                            <a href="{{ route('userManagement.index') }}" class="nav-link btn btn-icon btn-clean btn-lg">
+                            <a href="{{ route('roles.index') }}" class="nav-link btn btn-icon btn-clean btn-lg">
 										<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo3/dist/../src/media/svg/icons/Home/Commode1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24"/>
