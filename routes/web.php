@@ -25,8 +25,9 @@ Auth::routes();
 
 //Middleware role auth added
 Route::get('/', function () {
+    dd('hello world');
     return view('auth.login');
-})->middleware(['auth']);
+});
 
 Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
