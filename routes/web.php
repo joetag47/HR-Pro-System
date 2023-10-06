@@ -25,7 +25,6 @@ Auth::routes();
 
 //Middleware role auth added
 Route::get('/', function () {
-    dd('hello world');
     return view('auth.login');
 });
 
